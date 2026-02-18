@@ -40,7 +40,7 @@ const GoatDetails = ({ goat, onClose }) => {
           {goat.photo_url && (
             <div className="goat-photo-section">
               <img 
-                src={goat.photo_url.startsWith('http') ? goat.photo_url : `http://localhost:1230${goat.photo_url}`} 
+                src={goat.photo_url.startsWith('http') ? goat.photo_url : `${import.meta.env.VITE_API_URL || 'http://localhost:1230'}${goat.photo_url}`} 
                 alt={`Goat ${goat.goat_id}`}
                 className="goat-photo"
                 onError={(e) => {
