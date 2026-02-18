@@ -40,11 +40,19 @@ const GoatDetails = ({ goat, onClose }) => {
           {goat.photo_url && (
             <div className="goat-photo-section">
               <img 
-                src={goat.photo_url.startsWith('http') ? goat.photo_url : `${(import.meta.env.VITE_API_URL || '/api').replace('/api', '')}${goat.photo_url}`} 
+                src={
+                  goat.photo_url.startsWith('http') || goat.photo_url.startsWith('data:') 
+                    ? goat.photo_url 
+                    : `${(import.meta.env.VITE_API_URL || '/api').replace('/api', '')}${goat.photo_url}`
+                } 
                 alt={`Goat ${goat.goat_id}`}
                 className="goat-photo"
+                onLoad={() => console.log('Image loaded successfully:', goat.photo_url)}
                 onError={(e) => {
-                  e.target.style.display = 'none';
+                  console.error('Failed to load image:', goat.photo_url);
+                  console.error('Attempted URL:', e.target.src);
+                  e.target.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="200" height="200"%3E%3Crect width="200" height="200" fill="%23f0f0f0"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" font-family="Arial" font-size="16" fill="%23999"%3EImage Not Available%3C/text%3E%3C/svg%3E';
+                  e.target.style.maxHeight = '200px';
                 }}
               />
             </div>
