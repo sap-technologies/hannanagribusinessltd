@@ -1,0 +1,357 @@
+/* Kid Growth List - Professional Styling with Blue/Cyan Gradient */
+.kid-growth-list-container {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.kid-growth-list-container h3 {
+  margin-bottom: 1.5rem;
+  color: #1e293b;
+  font-size: 1.5rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.kid-growth-list-container h3::before {
+  content: '📈';
+  font-size: 1.8rem;
+}
+
+.kid-growth-table-wrapper {
+  overflow-x: auto;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+}
+
+.kid-growth-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  background: white;
+}
+
+.kid-growth-table thead {
+  background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.kid-growth-table th {
+  padding: 1rem 1.25rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  border-bottom: 2px solid #2563eb;
+}
+
+.kid-growth-table tbody tr {
+  border-bottom: 1px solid #f1f5f9;
+  transition: all 0.2s ease;
+}
+
+.kid-growth-table tbody tr:hover {
+  background: linear-gradient(to right, #eff6ff 0%, #ecfeff 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.15);
+}
+
+.kid-growth-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.kid-growth-table td {
+  padding: 1rem 1.25rem;
+  color: #334155;
+  vertical-align: middle;
+}
+
+/* Highlighted Values */
+.kid-growth-kid-id {
+  font-weight: 700;
+  color: #3b82f6;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+  font-family: 'Courier New', monospace;
+}
+
+.kid-growth-date {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.kid-growth-weight {
+  font-weight: 700;
+  color: #06b6d4;
+  font-size: 1.05rem;
+  font-family: 'Courier New', monospace;
+}
+
+.kid-growth-height {
+  font-weight: 600;
+  color: #0891b2;
+  font-size: 0.95rem;
+}
+
+/* Health Status Badges */
+.kid-growth-health-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.875rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.kid-growth-health-badge.excellent {
+  background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+  color: #065f46;
+}
+
+.kid-growth-health-badge.excellent::before {
+  content: '💪';
+  font-size: 1rem;
+}
+
+.kid-growth-health-badge.good {
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+  color: #1e40af;
+}
+
+.kid-growth-health-badge.good::before {
+  content: '👍';
+  font-size: 1rem;
+}
+
+.kid-growth-health-badge.fair {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  color: #92400e;
+}
+
+.kid-growth-health-badge.fair::before {
+  content: '⚠️';
+  font-size: 1rem;
+}
+
+.kid-growth-health-badge.poor {
+  background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+  color: #991b1b;
+}
+
+.kid-growth-health-badge.poor::before {
+  content: '⚠️';
+  font-size: 1rem;
+}
+
+/* Growth Rate Indicator */
+.kid-growth-rate {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.kid-growth-rate.positive {
+  color: #10b981;
+}
+
+.kid-growth-rate.positive::before {
+  content: '↗';
+  font-size: 1.2rem;
+}
+
+.kid-growth-rate.negative {
+  color: #ef4444;
+}
+
+.kid-growth-rate.negative::before {
+  content: '↘';
+  font-size: 1.2rem;
+}
+
+.kid-growth-rate.stable {
+  color: #64748b;
+}
+
+.kid-growth-rate.stable::before {
+  content: '→';
+  font-size: 1.2rem;
+}
+
+/* Action Buttons */
+.kid-growth-actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+.kid-growth-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.kid-growth-btn-view {
+  background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+  color: white;
+}
+
+.kid-growth-btn-view:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.kid-growth-btn-edit {
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+  color: white;
+}
+
+.kid-growth-btn-edit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+}
+
+.kid-growth-btn-delete {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: white;
+}
+
+.kid-growth-btn-delete:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+/* Empty State */
+.kid-growth-no-data {
+  text-align: center;
+  padding: 3rem !important;
+  color: #94a3b8;
+  font-style: italic;
+  background: linear-gradient(135deg, #eff6ff 0%, #ecfeff 100%);
+}
+
+.kid-growth-no-data::before {
+  content: '📊';
+  display: block;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
+
+/* Notes Preview */
+.kid-growth-notes-preview {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .kid-growth-list-container {
+    padding: 1rem;
+    border-radius: 8px;
+  }
+
+  .kid-growth-list-container h3 {
+    font-size: 1.25rem;
+  }
+
+  .kid-growth-table-wrapper {
+    border-radius: 6px;
+  }
+
+  .kid-growth-table th,
+  .kid-growth-table td {
+    padding: 0.75rem;
+    font-size: 0.85rem;
+  }
+
+  .kid-growth-actions {
+    flex-direction: column;
+  }
+
+  .kid-growth-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .kid-growth-list-container {
+    padding: 0.75rem;
+  }
+
+  .kid-growth-table th,
+  .kid-growth-table td {
+    padding: 0.5rem;
+    font-size: 0.8rem;
+  }
+
+  .kid-growth-health-badge {
+    font-size: 0.7rem;
+    padding: 0.25rem 0.625rem;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .kid-growth-list-container {
+    box-shadow: none;
+  }
+
+  .kid-growth-actions {
+    display: none;
+  }
+
+  .kid-growth-table tbody tr:hover {
+    background: white;
+    transform: none;
+    box-shadow: none;
+  }
+}

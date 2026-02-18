@@ -1,0 +1,262 @@
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px;
+}
+
+.login-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 450px;
+  padding: 40px;
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.login-logo {
+  height: 100px;
+  width: auto;
+  object-fit: contain;
+  margin-bottom: 15px;
+}
+
+.login-header h1 {
+  color: #667eea;
+  margin: 0 0 10px 0;
+  font-size: 28px;
+}
+
+.login-header p {
+  color: #666;
+  margin: 0;
+  font-size: 14px;
+}
+
+.login-error {
+  background: #fee;
+  border: 1px solid #fcc;
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 20px;
+  color: #c33;
+  font-size: 14px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  color: #333;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.form-group input {
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.form-group input:disabled {
+  background: #f5f5f5;
+  cursor: not-allowed;
+}
+
+.login-button {
+  padding: 14px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  margin-top: 10px;
+}
+
+.login-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.login-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.login-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.login-footer {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+  text-align: center;
+  font-size: 13px;
+  color: #666;
+}
+
+.login-footer p {
+  margin: 5px 0;
+}
+
+.login-footer strong {
+  color: #333;
+  font-family: monospace;
+  background: #f5f5f5;
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+
+.login-footer .warning {
+  color: #f59e0b;
+  margin-top: 10px;
+  font-weight: 500;
+}
+
+.login-footer .signup-info {
+  margin-top: 15px;
+  padding-top: 15px;
+}
+
+.login-footer .signup-info hr {
+  border: none;
+  border-top: 1px solid #e5e7eb;
+  margin: 0 0 15px 0;
+}
+
+.login-footer .info-text {
+  color: #6b7280;
+  font-size: 12px;
+  line-height: 1.5;
+  margin: 8px 0;
+}
+
+.login-footer .info-text strong {
+  color: #667eea;
+  background: transparent;
+  padding: 0;
+  font-family: inherit;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .login-logo {
+    height: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-logo {
+    height: 70px;
+  }
+
+  .login-card {
+    padding: 30px 20px;
+  }
+
+  .login-header h1 {
+    font-size: 24px;
+  }
+
+  .form-group input {
+    padding: 10px 14px;
+  }
+
+  .login-button {
+    padding: 12px;
+    font-size: 15px;
+  }
+}
+
+/* Landscape Optimization for Mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+  .login-logo {
+    height: 60px;
+  }
+
+  .login-container {
+    padding: 20px 10px;
+  }
+
+  .login-card {
+    padding: 20px 30px;
+    max-width: 500px;
+  }
+
+  .login-header {
+    margin-bottom: 1rem;
+  }
+
+  .login-header h1 {
+    font-size: 24px;
+    margin-bottom: 0.5rem;
+  }
+
+  .login-header p {
+    font-size: 13px;
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  .form-group label {
+    margin-bottom: 0.3rem;
+    font-size: 13px;
+  }
+
+  .form-group input {
+    padding: 10px 14px;
+    font-size: 14px;
+  }
+
+  .login-button {
+    padding: 10px;
+    margin-top: 1rem;
+  }
+
+  .error-message {
+    padding: 8px;
+    font-size: 13px;
+  }
+}

@@ -1,0 +1,233 @@
+.goat-list-container {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.goat-list-container h2 {
+  margin-bottom: 1.5rem;
+  color: #2c3e50;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 3rem;
+  color: #7f8c8d;
+}
+
+.empty-state h3 {
+  margin-bottom: 0.5rem;
+}
+
+.goat-table-wrapper {
+  overflow-x: auto;
+}
+
+.goat-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.goat-table thead {
+  background-color: #34495e;
+  color: white;
+}
+
+.goat-table th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+}
+
+.goat-table tbody tr {
+  border-bottom: 1px solid #ecf0f1;
+  transition: background-color 0.2s;
+}
+
+.goat-table tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+.goat-table td {
+  padding: 1rem;
+}
+
+.goat-id {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.sex-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.sex-badge.male {
+  background-color: #3498db;
+  color: white;
+}
+
+.sex-badge.female {
+  background-color: #e91e63;
+  color: white;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  color: white;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn-action {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.btn-action:hover {
+  background-color: #ecf0f1;
+}
+
+.btn-view:hover {
+  background-color: #d6eaf8;
+}
+
+.btn-edit:hover {
+  background-color: #fef5e7;
+}
+
+.btn-delete:hover {
+  background-color: #fadbd8;
+}
+
+@media (max-width: 1024px) {
+  .goat-table {
+    font-size: 0.9rem;
+  }
+  
+  .goat-table th,
+  .goat-table td {
+    padding: 0.75rem 0.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .goat-list-container {
+    padding: 1rem;
+  }
+  
+  .goat-list-container h2 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+  
+  .goat-table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .goat-table {
+    font-size: 0.8rem;
+    min-width: 600px;
+  }
+  
+  .goat-table th,
+  .goat-table td {
+    padding: 0.5rem 0.375rem;
+    white-space: nowrap;
+  }
+  
+  .actions {
+    gap: 0.25rem;
+  }
+  
+  .btn-action {
+    font-size: 1rem;
+    padding: 0.25rem;
+  }
+  
+  .sex-badge,
+  .status-badge {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .goat-list-container {
+    padding: 0.75rem;
+  }
+  
+  .goat-list-container h2 {
+    font-size: 1.2rem;
+  }
+  
+  .goat-table {
+    font-size: 0.75rem;
+  }
+  
+  .empty-state {
+    padding: 2rem 1rem;
+  }
+}
+
+/* Landscape Optimization for Mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+  .goat-list-container {
+    padding: 0.75rem 1rem;
+    max-height: 100vh;
+    overflow-y: auto;
+  }
+
+  .goat-list-container h2 {
+    font-size: 1.3rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .table-container {
+    max-height: calc(100vh - 180px);
+  }
+
+  .goat-table {
+    font-size: 0.8rem;
+  }
+
+  .goat-table th,
+  .goat-table td {
+    padding: 8px 10px;
+  }
+
+  .action-buttons {
+    gap: 4px;
+  }
+
+  .btn {
+    padding: 4px 8px;
+    font-size: 11px;
+  }
+
+  .empty-state {
+    padding: 2rem 1rem;
+  }
+
+  .empty-state-icon {
+    font-size: 3rem;
+  }
+}

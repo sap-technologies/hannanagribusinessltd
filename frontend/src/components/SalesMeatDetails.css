@@ -1,0 +1,400 @@
+.sales-meat-details-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.sales-meat-details-content {
+  background: white;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 900px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Header */
+.sales-meat-details-header {
+  background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+  color: white;
+  padding: 2rem;
+  border-radius: 16px 16px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.sales-meat-details-header h2 {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.sales-meat-details-header h2::before {
+  content: '🥩';
+  font-size: 2rem;
+}
+
+.sales-meat-details-close {
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  font-size: 1.75rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  font-weight: 300;
+}
+
+.sales-meat-details-close:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: rotate(90deg);
+}
+
+/* Body */
+.sales-meat-details-body {
+  padding: 2rem;
+}
+
+/* Section Styling */
+.sales-meat-details-section {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: #fafafa;
+  border-radius: 12px;
+  border: 2px solid #f0f0f0;
+  transition: all 0.2s ease;
+}
+
+.sales-meat-details-section:hover {
+  background: #fef2f2;
+  border-color: #fecaca;
+}
+
+.sales-meat-details-section:last-child {
+  margin-bottom: 0;
+}
+
+.sales-meat-details-section h3 {
+  margin: 0 0 1.25rem 0;
+  color: #dc2626;
+  font-size: 1.2rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid #fee2e2;
+}
+
+/* Icons for sections */
+.sales-meat-details-section.sale-info h3::before {
+  content: '📋';
+}
+
+.sales-meat-details-section.goat-info h3::before {
+  content: '🐐';
+}
+
+.sales-meat-details-section.pricing-info h3::before {
+  content: '💰';
+}
+
+.sales-meat-details-section.payment-info h3::before {
+  content: '💳';
+}
+
+.sales-meat-details-section.record-info h3::before {
+  content: '📅';
+}
+
+/* Grid Layout */
+.sales-meat-details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.25rem;
+}
+
+.sales-meat-detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  padding: 1rem;
+  background: white;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  transition: all 0.2s ease;
+}
+
+.sales-meat-detail-item:hover {
+  border-color: #fca5a5;
+  box-shadow: 0 2px 4px rgba(220, 38, 38, 0.1);
+}
+
+.sales-meat-detail-label {
+  font-size: 0.85rem;
+  color: #64748b;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.sales-meat-detail-value {
+  font-size: 1.05rem;
+  color: #1e293b;
+  font-weight: 600;
+}
+
+/* Highlighted Values */
+.sales-meat-detail-item.highlight-goat .sales-meat-detail-value {
+  color: #dc2626;
+  font-weight: 700;
+  font-size: 1.15rem;
+}
+
+.sales-meat-detail-item.highlight-weight .sales-meat-detail-value {
+  color: #2563eb;
+  font-weight: 700;
+}
+
+.sales-meat-detail-item.highlight-price .sales-meat-detail-value {
+  color: #16a34a;
+  font-weight: 700;
+}
+
+/* Total Price Highlight */
+.sales-meat-total-price-box {
+  grid-column: 1 / -1;
+  background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+  border: 3px solid #16a34a;
+  padding: 1.5rem;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(22, 163, 74, 0.2);
+}
+
+.sales-meat-total-label {
+  font-size: 1.1rem;
+  color: #15803d;
+  font-weight: 600;
+}
+
+.sales-meat-total-value {
+  font-size: 2rem;
+  color: #15803d;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sales-meat-total-value::before {
+  content: '💵';
+  font-size: 1.75rem;
+}
+
+/* Calculation Display */
+.sales-meat-calculation-box {
+  grid-column: 1 / -1;
+  background: #f8fafc;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 2px dashed #cbd5e1;
+  text-align: center;
+}
+
+.sales-meat-calculation-label {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.sales-meat-calculation-formula {
+  font-size: 1rem;
+  color: #475569;
+  font-weight: 600;
+  font-family: 'Courier New', monospace;
+}
+
+/* Payment Badge */
+.sales-meat-payment-method-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  border-radius: 25px;
+  font-weight: 700;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.sales-meat-payment-method-badge.cash {
+  background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+  color: white;
+}
+
+.sales-meat-payment-method-badge.mobile-money {
+  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+  color: white;
+}
+
+.sales-meat-payment-method-badge.bank-transfer {
+  background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+  color: white;
+}
+
+.sales-meat-payment-method-badge.credit {
+  background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
+  color: white;
+}
+
+/* Footer */
+.sales-meat-details-footer {
+  padding: 1.5rem 2rem;
+  background: #f8fafc;
+  border-radius: 0 0 16px 16px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  border-top: 2px solid #e5e7eb;
+}
+
+.sales-meat-btn-close {
+  padding: 0.75rem 2rem;
+  background: white;
+  color: #475569;
+  border: 2px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sales-meat-btn-close:hover {
+  background: #f1f5f9;
+  border-color: #94a3b8;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .sales-meat-details-content {
+    max-height: 95vh;
+    border-radius: 12px;
+  }
+  
+  .sales-meat-details-header {
+    padding: 1.5rem;
+    border-radius: 12px 12px 0 0;
+  }
+  
+  .sales-meat-details-header h2 {
+    font-size: 1.5rem;
+  }
+  
+  .sales-meat-details-body {
+    padding: 1.5rem;
+  }
+  
+  .sales-meat-details-section {
+    padding: 1.25rem;
+  }
+  
+  .sales-meat-details-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .sales-meat-total-price-box {
+    flex-direction: column;
+    gap: 0.75rem;
+    text-align: center;
+  }
+  
+  .sales-meat-total-value {
+    font-size: 1.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .sales-meat-details-overlay {
+    padding: 0.5rem;
+  }
+  
+  .sales-meat-details-header {
+    padding: 1rem;
+  }
+  
+  .sales-meat-details-header h2 {
+    font-size: 1.3rem;
+  }
+  
+  .sales-meat-details-body {
+    padding: 1rem;
+  }
+  
+  .sales-meat-details-section {
+    padding: 1rem;
+  }
+  
+  .sales-meat-detail-item {
+    padding: 0.875rem;
+  }
+  
+  .sales-meat-total-value {
+    font-size: 1.5rem;
+  }
+  
+  .sales-meat-details-footer {
+    padding: 1rem;
+  }
+}

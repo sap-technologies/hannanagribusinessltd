@@ -1,0 +1,173 @@
+.ux-demo {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.ux-demo h1 {
+  color: #333;
+  margin-bottom: 16px;
+}
+
+.demo-intro {
+  color: #666;
+  font-size: 16px;
+  margin-bottom: 40px;
+  padding: 16px;
+  background: #f0f8ff;
+  border-left: 4px solid #2196F3;
+  border-radius: 4px;
+}
+
+.demo-section {
+  margin-bottom: 48px;
+  padding: 24px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.demo-section h2 {
+  color: #4CAF50;
+  margin: 0 0 20px 0;
+  font-size: 20px;
+}
+
+.demo-section textarea {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: inherit;
+  resize: vertical;
+  margin-top: 12px;
+}
+
+.demo-section textarea:focus {
+  outline: none;
+  border-color: #4CAF50;
+}
+
+.file-info {
+  margin-top: 16px;
+  padding: 12px;
+  background: #e8f5e9;
+  border-left: 4px solid #4CAF50;
+  border-radius: 4px;
+}
+
+.file-info p {
+  margin: 4px 0;
+  font-size: 14px;
+  color: #2e7d32;
+}
+
+.button-group {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.btn-danger,
+.btn-info {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-danger {
+  background: #f44336;
+  color: white;
+}
+
+.btn-danger:hover {
+  background: #d32f2f;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3);
+}
+
+.btn-info {
+  background: #2196F3;
+  color: white;
+}
+
+.btn-info:hover {
+  background: #1976D2;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
+}
+
+.shortcuts-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.shortcut {
+  padding: 12px;
+  background: #f5f5f5;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.shortcut kbd {
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 4px 8px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.1);
+}
+
+.hint {
+  margin-top: 12px;
+  font-size: 13px;
+  color: #666;
+  padding: 8px 12px;
+  background: #fff3cd;
+  border-left: 3px solid #ffc107;
+  border-radius: 4px;
+}
+
+.hint kbd {
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  padding: 2px 5px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .ux-demo {
+    margin: 20px auto;
+    padding: 12px;
+  }
+  
+  .demo-section {
+    padding: 16px;
+  }
+  
+  .shortcuts-list {
+    grid-template-columns: 1fr;
+  }
+  
+  .button-group {
+    flex-direction: column;
+  }
+  
+  .btn-danger,
+  .btn-info {
+    width: 100%;
+  }
+}

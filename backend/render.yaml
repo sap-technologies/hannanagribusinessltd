@@ -1,0 +1,24 @@
+# Render Deployment Configuration
+# Deploy backend on Render: https://render.com
+
+# Build Command: npm install
+# Start Command: npm start
+
+# Environment Variables to set in Render Dashboard:
+# - DATABASE_URL: Your PostgreSQL connection string
+# - JWT_SECRET: Your JWT secret key
+# - NODE_ENV: production
+# - PORT: 1230 (or Render's auto-assigned port)
+# - FRONTEND_URL: https://your-frontend.vercel.app
+
+# Database Setup:
+# 1. Create a PostgreSQL database on Render
+# 2. Copy the Internal Database URL
+# 3. Add it as DATABASE_URL environment variable
+# 4. The database tables will be created automatically
+
+# CORS Configuration:
+# Make sure to add your Vercel frontend URL to CORS allowed origins
+
+# Note: File uploads now use base64 storage in database
+# No filesystem writes - perfect for Render's ephemeral storage

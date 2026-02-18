@@ -1,0 +1,352 @@
+/* Vaccination List - Professional Styling with Teal/Cyan Gradient */
+.vaccination-list-container {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.vaccination-list-container h3 {
+  margin-bottom: 1.5rem;
+  color: #1e293b;
+  font-size: 1.5rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.vaccination-list-container h3::before {
+  content: '💉';
+  font-size: 1.8rem;
+}
+
+.vaccination-table-wrapper {
+  overflow-x: auto;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+}
+
+.vaccination-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  background: white;
+}
+
+.vaccination-table thead {
+  background: linear-gradient(135deg, #14b8a6 0%, #06b6d4 100%);
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.vaccination-table th {
+  padding: 1rem 1.25rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  border-bottom: 2px solid #0d9488;
+}
+
+.vaccination-table tbody tr {
+  border-bottom: 1px solid #f1f5f9;
+  transition: all 0.2s ease;
+}
+
+.vaccination-table tbody tr:hover {
+  background: linear-gradient(to right, #f0fdfa 0%, #ecfeff 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(20, 184, 166, 0.15);
+}
+
+.vaccination-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.vaccination-table td {
+  padding: 1rem 1.25rem;
+  color: #334155;
+  vertical-align: middle;
+}
+
+/* Highlighted Values */
+.vaccination-goat-id {
+  font-weight: 700;
+  color: #14b8a6;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+  font-family: 'Courier New', monospace;
+}
+
+.vaccination-date {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.vaccination-next-date {
+  font-weight: 600;
+  color: #06b6d4;
+  font-size: 0.95rem;
+}
+
+/* Vaccine Type Badges */
+.vaccination-type-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.875rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.vaccination-type-badge.ppr {
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+  color: #1e40af;
+}
+
+.vaccination-type-badge.ppr::before {
+  content: '🛡️';
+  font-size: 1rem;
+}
+
+.vaccination-type-badge.anthrax {
+  background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+  color: #991b1b;
+}
+
+.vaccination-type-badge.anthrax::before {
+  content: '⚠️';
+  font-size: 1rem;
+}
+
+.vaccination-type-badge.dewormer {
+  background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+  color: #065f46;
+}
+
+.vaccination-type-badge.dewormer::before {
+  content: '🌿';
+  font-size: 1rem;
+}
+
+.vaccination-type-badge.vitamin {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  color: #92400e;
+}
+
+.vaccination-type-badge.vitamin::before {
+  content: '💊';
+  font-size: 1rem;
+}
+
+.vaccination-type-badge.other {
+  background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+  color: #3730a3;
+}
+
+.vaccination-type-badge.other::before {
+  content: '💉';
+  font-size: 1rem;
+}
+
+/* Administered By Badge */
+.vaccination-admin-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.875rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%);
+  color: #0f766e;
+  letter-spacing: 0.5px;
+}
+
+.vaccination-admin-badge::before {
+  content: '👨‍⚕️';
+  font-size: 1rem;
+}
+
+/* Cost Display */
+.vaccination-cost {
+  font-weight: 700;
+  color: #14b8a6;
+  font-size: 1.05rem;
+  font-family: 'Courier New', monospace;
+}
+
+/* Action Buttons */
+.vaccination-actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+.vaccination-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.vaccination-btn-view {
+  background: linear-gradient(135deg, #14b8a6 0%, #06b6d4 100%);
+  color: white;
+}
+
+.vaccination-btn-view:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(20, 184, 166, 0.3);
+}
+
+.vaccination-btn-edit {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
+}
+
+.vaccination-btn-edit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.vaccination-btn-delete {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: white;
+}
+
+.vaccination-btn-delete:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+/* Empty State */
+.vaccination-no-data {
+  text-align: center;
+  padding: 3rem !important;
+  color: #94a3b8;
+  font-style: italic;
+  background: linear-gradient(135deg, #f0fdfa 0%, #ecfeff 100%);
+}
+
+.vaccination-no-data::before {
+  content: '💉';
+  display: block;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
+
+/* Notes Preview */
+.vaccination-notes-preview {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .vaccination-list-container {
+    padding: 1rem;
+    border-radius: 8px;
+  }
+
+  .vaccination-list-container h3 {
+    font-size: 1.25rem;
+  }
+
+  .vaccination-table-wrapper {
+    border-radius: 6px;
+  }
+
+  .vaccination-table th,
+  .vaccination-table td {
+    padding: 0.75rem;
+    font-size: 0.85rem;
+  }
+
+  .vaccination-actions {
+    flex-direction: column;
+  }
+
+  .vaccination-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .vaccination-list-container {
+    padding: 0.75rem;
+  }
+
+  .vaccination-table th,
+  .vaccination-table td {
+    padding: 0.5rem;
+    font-size: 0.8rem;
+  }
+
+  .vaccination-type-badge,
+  .vaccination-admin-badge {
+    font-size: 0.7rem;
+    padding: 0.25rem 0.625rem;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .vaccination-list-container {
+    box-shadow: none;
+  }
+
+  .vaccination-actions {
+    display: none;
+  }
+
+  .vaccination-table tbody tr:hover {
+    background: white;
+    transform: none;
+    box-shadow: none;
+  }
+}

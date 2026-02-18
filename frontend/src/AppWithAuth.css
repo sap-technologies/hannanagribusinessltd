@@ -1,0 +1,352 @@
+.app-with-auth {
+  min-height: 100vh;
+  background: #f5f7fa;
+}
+
+.auth-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  gap: 20px;
+}
+
+.loader {
+  width: 50px;
+  height: 50px;
+  border: 4px solid #e5e7eb;
+  border-top-color: #667eea;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.auth-loading p {
+  color: #666;
+  font-size: 16px;
+}
+
+.auth-header {
+  background: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 12px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header-logo-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-logo {
+  height: 45px;
+  width: auto;
+  object-fit: contain;
+}
+
+.header-left h2 {
+  margin: 0;
+  color: #333;
+  font-size: 20px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.user-info {
+  color: #666;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.btn-admin-toggle {
+  padding: 8px 16px;
+  background: #6366f1;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.btn-admin-toggle:hover {
+  background: #4f46e5;
+}
+
+.btn-search {
+  padding: 8px 16px;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.btn-search:hover {
+  background: #5568d3;
+}
+
+.btn-reminders {
+  padding: 8px 16px;
+  background: #8b5cf6;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.btn-reminders:hover {
+  background: #7c3aed;
+}
+
+.btn-help {
+  padding: 8px 16px;
+  background: #10b981;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.btn-help:hover {
+  background: #059669;
+}
+
+.btn-dashboard {
+  padding: 8px 16px;
+  background: #f59e0b;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.btn-dashboard:hover {
+  background: #d97706;
+}
+
+.btn-profile {
+  padding: 8px 14px;
+  background: white;
+  color: #333;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.btn-profile:hover {
+  background: #f9fafb;
+  border-color: #667eea;
+}
+
+.header-profile-photo {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e5e7eb;
+}
+
+.btn-icon {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.btn-text {
+  font-size: inherit;
+  line-height: 1;
+}
+
+.profile-name-text {
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.btn-logout {
+  padding: 8px 16px;
+  background: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.btn-logout:hover {
+  background: #dc2626;
+}
+
+.auth-content {
+  padding: 0;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .auth-header {
+    padding: 10px 15px;
+  }
+
+  .header-logo {
+    height: 35px;
+  }
+
+  .header-left h2 {
+    font-size: 15px;
+  }
+
+  .header-right {
+    gap: 8px;
+  }
+
+  .btn-admin-toggle,
+  .btn-logout,
+  .btn-help,
+  .btn-reminders,
+  .btn-search,
+  .btn-dashboard,
+  .btn-profile {
+    padding: 7px 12px;
+    font-size: 13px;
+  }
+
+  .profile-name-text {
+    max-width: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-header {
+    padding: 8px 12px;
+  }
+
+  .header-logo {
+    height: 30px;
+  }
+
+  .header-left h2 {
+    font-size: 13px;
+  }
+
+  .header-right {
+    gap: 6px;
+  }
+
+  .btn-admin-toggle,
+  .btn-logout,
+  .btn-help,
+  .btn-reminders,
+  .btn-search,
+  .btn-dashboard,
+  .btn-profile {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  .btn-icon {
+    font-size: 14px;
+  }
+
+  .profile-name-text {
+    max-width: 60px;
+  }
+
+  .header-profile-photo {
+    width: 26px;
+    height: 26px;
+  }
+}
+
+/* Landscape Optimization for Mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+  .auth-header {
+    padding: 6px 15px;
+  }
+
+  .header-left h2 {
+    font-size: 13px;
+  }
+
+  .header-right {
+    gap: 6px;
+  }
+
+  .btn-admin-toggle,
+  .btn-reminders,
+  .btn-search,
+  .btn-help,
+  .btn-dashboard,
+  .btn-profile,
+  .btn-logout {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  .profile-name-text {
+    max-width: 60px;
+  }
+}

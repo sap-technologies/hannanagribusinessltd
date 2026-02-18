@@ -1,0 +1,389 @@
+/* Monthly Summary Form - Professional Styling with Slate/Blue Gradient */
+.monthly-summary-form-container {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  border-top: 4px solid #475569;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.monthly-summary-form-container h3 {
+  margin-bottom: 1.5rem;
+  color: #1e293b;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.form-header-with-close {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.close-form-btn {
+  background: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  padding: 0;
+}
+
+.close-form-btn:hover {
+  background: #c82333;
+  transform: rotate(90deg) scale(1.1);
+}
+
+.close-form-btn:active {
+  transform: rotate(90deg) scale(0.95);
+}
+
+.monthly-summary-form-container h3::before {
+  content: '📊';
+  font-size: 1.75rem;
+}
+
+/* Form Layout */
+.monthly-summary-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.monthly-summary-form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.25rem;
+}
+
+.monthly-summary-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.monthly-summary-form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.monthly-summary-form-group label {
+  font-weight: 600;
+  color: #334155;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.monthly-summary-form-group label::before {
+  content: '';
+  width: 3px;
+  height: 12px;
+  background: linear-gradient(180deg, #475569 0%, #3b82f6 100%);
+  border-radius: 2px;
+}
+
+/* Form Inputs */
+.monthly-summary-form-group input,
+.monthly-summary-form-group select,
+.monthly-summary-form-group textarea {
+  padding: 0.875rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: all 0.2s;
+  background: white;
+}
+
+.monthly-summary-form-group input:focus,
+.monthly-summary-form-group select:focus,
+.monthly-summary-form-group textarea:focus {
+  outline: none;
+  border-color: #475569;
+  box-shadow: 0 0 0 4px rgba(71, 85, 105, 0.1);
+  background: #f8fafc;
+}
+
+.monthly-summary-form-group input:disabled,
+.monthly-summary-form-group select:disabled,
+.monthly-summary-form-group textarea:disabled {
+  background: #f8fafc;
+  cursor: not-allowed;
+  color: #94a3b8;
+}
+
+.monthly-summary-form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+  font-family: inherit;
+}
+
+.monthly-summary-form-group select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%23475569' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E");
+  background-position: right 0.5rem center;
+  background-repeat: no-repeat;
+  background-size: 1.5em 1.5em;
+  padding-right: 2.5rem;
+}
+
+/* Highlighted Important Fields */
+.monthly-summary-form-group.important input,
+.monthly-summary-form-group.important select {
+  border-color: #475569;
+  background: linear-gradient(to right, #f8fafc 0%, #eff6ff 100%);
+  font-weight: 600;
+}
+
+.monthly-summary-form-group.important label {
+  color: #475569;
+}
+
+/* Form Sections */
+.monthly-summary-form-section {
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #f8fafc 0%, #eff6ff 100%);
+  border-radius: 8px;
+  border-left: 4px solid #475569;
+  margin-bottom: 1.5rem;
+}
+
+.monthly-summary-form-section h4 {
+  color: #1e293b;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.monthly-summary-form-section h4::before {
+  content: '📋';
+  font-size: 1.25rem;
+}
+
+/* Info Box */
+.monthly-summary-info-box {
+  padding: 1rem;
+  background: linear-gradient(135deg, #f8fafc 0%, #eff6ff 100%);
+  border-left: 4px solid #3b82f6;
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
+}
+
+.monthly-summary-info-box p {
+  margin: 0;
+  color: #64748b;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.monthly-summary-info-box p::before {
+  content: 'ℹ️ ';
+  margin-right: 0.5rem;
+}
+
+/* Submit Button */
+.monthly-summary-submit-btn {
+  background: linear-gradient(135deg, #475569 0%, #3b82f6 100%);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 4px 6px rgba(71, 85, 105, 0.3);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.monthly-summary-submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(71, 85, 105, 0.4);
+}
+
+.monthly-summary-submit-btn:active {
+  transform: translateY(0);
+}
+
+.monthly-summary-submit-btn:disabled {
+  background: linear-gradient(135deg, #cbd5e1 0%, #94a3b8 100%);
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+.monthly-summary-submit-btn::before {
+  content: '💾';
+  font-size: 1.25rem;
+}
+
+/* Cancel Button */
+.monthly-summary-cancel-btn {
+  background: white;
+  color: #64748b;
+  border: 2px solid #e2e8f0;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-right: 1rem;
+}
+
+.monthly-summary-cancel-btn:hover {
+  border-color: #cbd5e1;
+  background: #f8fafc;
+}
+
+/* Button Group */
+.monthly-summary-button-group {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-start;
+  margin-top: 2rem;
+}
+
+/* Error Message */
+.monthly-summary-error {
+  color: #dc2626;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.monthly-summary-error::before {
+  content: '⚠️';
+  font-size: 1rem;
+}
+
+/* Success Message */
+.monthly-summary-success {
+  padding: 1rem;
+  background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+  border-left: 4px solid #10b981;
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
+  color: #065f46;
+  font-weight: 600;
+}
+
+.monthly-summary-success::before {
+  content: '✅ ';
+  margin-right: 0.5rem;
+}
+
+/* Statistics Summary Box */
+.monthly-summary-stats-box {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #f8fafc 0%, #eff6ff 100%);
+  border-radius: 8px;
+}
+
+.monthly-summary-stat-item {
+  padding: 1rem;
+  background: white;
+  border-radius: 6px;
+  border-left: 3px solid #3b82f6;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.monthly-summary-stat-label {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin-bottom: 0.25rem;
+}
+
+.monthly-summary-stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1e293b;
+  font-family: 'Courier New', monospace;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .monthly-summary-form-container {
+    padding: 1.5rem;
+    border-radius: 8px;
+  }
+
+  .monthly-summary-form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .monthly-summary-button-group {
+    flex-direction: column;
+  }
+
+  .monthly-summary-submit-btn,
+  .monthly-summary-cancel-btn {
+    width: 100%;
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .monthly-summary-form-container {
+    padding: 1rem;
+  }
+
+  .monthly-summary-form-container h3 {
+    font-size: 1.25rem;
+  }
+
+  .monthly-summary-form-group input,
+  .monthly-summary-form-group select,
+  .monthly-summary-form-group textarea {
+    font-size: 0.9rem;
+    padding: 0.75rem;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .monthly-summary-form-container {
+    box-shadow: none;
+  }
+
+  .monthly-summary-submit-btn,
+  .monthly-summary-cancel-btn {
+    display: none;
+  }
+}

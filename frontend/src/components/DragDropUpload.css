@@ -1,0 +1,133 @@
+.drag-drop-upload {
+  width: 100%;
+  margin: 20px 0;
+}
+
+.drop-zone {
+  border: 2px dashed #ccc;
+  border-radius: 12px;
+  padding: 40px 20px;
+  text-align: center;
+  transition: all 0.3s ease;
+  background: #fafafa;
+  cursor: pointer;
+}
+
+.drop-zone:hover {
+  border-color: #4CAF50;
+  background: #f0f8f0;
+}
+
+.drop-zone.dragging {
+  border-color: #4CAF50;
+  background: #e8f5e9;
+  border-style: solid;
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2);
+}
+
+.drop-zone-content {
+  pointer-events: none;
+}
+
+.drop-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.drop-text {
+  font-size: 16px;
+  color: #555;
+  margin: 8px 0;
+}
+
+.drop-text strong {
+  color: #333;
+  font-weight: 600;
+}
+
+.drop-or {
+  color: #999;
+  margin: 12px 0;
+  font-size: 14px;
+}
+
+.file-input-label {
+  pointer-events: all;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.file-input {
+  display: none;
+}
+
+.browse-button {
+  display: inline-block;
+  padding: 10px 24px;
+  background: #4CAF50;
+  color: white;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.browse-button:hover {
+  background: #45a049;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.browse-button:active {
+  transform: translateY(0);
+}
+
+.drop-hint {
+  font-size: 12px;
+  color: #999;
+  margin-top: 12px;
+}
+
+.upload-error {
+  margin-top: 12px;
+  padding: 12px;
+  background: #ffebee;
+  color: #c62828;
+  border-radius: 6px;
+  font-size: 14px;
+  border-left: 4px solid #c62828;
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .drop-zone {
+    padding: 30px 15px;
+  }
+  
+  .drop-icon {
+    font-size: 36px;
+  }
+  
+  .drop-text {
+    font-size: 14px;
+  }
+}
