@@ -210,10 +210,6 @@ app.listen(PORT, () => {
   console.log('  ✓ Rate Limiting');
   console.log('  ✓ CORS Protection');
   console.log('  ✓ Security Headers (Helmet)');
-  console.log('\n👤 Default Admin:');
-  console.log('  Email: admin@hannan.com');
-  console.log('  Password: Admin123!');
-  console.log('  ⚠️  CHANGE PASSWORD IMMEDIATELY!');
   console.log('========================================\n');
 });
 
