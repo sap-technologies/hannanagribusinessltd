@@ -1,11 +1,24 @@
 import sql from '../db.js';
 
+/**
+ * Database setup script for Hannan Agribusiness Limited
+ * This creates all the tables needed for the system:
+ * - Breeding Farm (goats, breeding, health, feeding, etc.)
+ * - Matooke Project
+ * - Coffee Project
+ * 
+ * Run this once during initial setup, or when you need to reset the DB
+ */
+
 const createTables = async () => {
   try {
-    console.log('🔧 Creating database tables for Hannan Agribusiness Limited...\n');
+    console.log('🔧 Setting up database tables for Hannan Agribusiness Limited...\n');
 
-    // ========== BREEDING FARM PROJECT (Goats) ==========
+    // ========== BREEDING FARM PROJECT ==========
+    // Everything related to goat farming operations
     console.log('📊 Creating Breeding Farm tables...');
+    
+    // Main goats inventory table - stores all goats in the farm
     const createGoatsTable = `
       CREATE TABLE IF NOT EXISTS goats (
         goat_id VARCHAR(50) PRIMARY KEY,
@@ -26,6 +39,7 @@ const createTables = async () => {
       );
     `;
 
+    // Add indexes to speed up common queries
     const createGoatIndexes = `
       CREATE INDEX IF NOT EXISTS idx_goats_breed ON goats(breed);
       CREATE INDEX IF NOT EXISTS idx_goats_status ON goats(status);
