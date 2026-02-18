@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import './NotificationsPage.css';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:1230';
+const API_URL = import.meta.env.VITE_API_URL || '/api';
 
 const NotificationsPage = ({ onClose = () => {} }) => {
   const [notifications, setNotifications] = useState([]);
@@ -26,7 +26,7 @@ const NotificationsPage = ({ onClose = () => {} }) => {
     try {
       setLoading(true);
       const token = localStorage.getItem('authToken');
-      const response = await fetch(`${API_URL}/api/notifications?limit=200`, {
+      const response = await fetch(`${API_URL}/notifications?limit=200`, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -78,7 +78,7 @@ const NotificationsPage = ({ onClose = () => {} }) => {
   const markAsRead = async (id) => {
     try {
       const token = localStorage.getItem('authToken');
-      await fetch(`${API_URL}/api/notifications/${id}/read`, {
+      await fetch(`${API_URL}/notifications/${id}/read`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`
@@ -98,7 +98,7 @@ const NotificationsPage = ({ onClose = () => {} }) => {
 
     try {
       const token = localStorage.getItem('authToken');
-      const response = await fetch(`${API_URL}/api/notifications/${id}`, {
+      const response = await fetch(`${API_URL}/notifications/${id}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`
@@ -120,7 +120,7 @@ const NotificationsPage = ({ onClose = () => {} }) => {
   const markAllAsRead = async () => {
     try {
       const token = localStorage.getItem('authToken');
-      const response = await fetch(`${API_URL}/api/notifications/mark-all-read`, {
+      const response = await fetch(`${API_URL}/notifications/mark-all-read`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`
@@ -140,7 +140,7 @@ const NotificationsPage = ({ onClose = () => {} }) => {
 
     try {
       const token = localStorage.getItem('authToken');
-      const response = await fetch(`${API_URL}/api/notifications/delete-all`, {
+      const response = await fetch(`${API_URL}/notifications/delete-all`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './SearchFilter.css';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:1230';
+const API_URL = import.meta.env.VITE_API_URL || '/api';
 
 const SearchFilter = ({ type, onSearch }) => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -17,7 +17,7 @@ const SearchFilter = ({ type, onSearch }) => {
   const fetchFilterOptions = async () => {
     try {
       const token = localStorage.getItem('authToken');
-      const response = await axios.get(`${API_URL}/api/search/filter-options`, {
+      const response = await axios.get(`${API_URL}/search/filter-options`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setFilterOptions(response.data);

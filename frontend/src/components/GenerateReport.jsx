@@ -11,7 +11,7 @@ const GenerateReport = ({ onReportGenerated }) => {
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1);
   const [message, setMessage] = useState({ text: '', type: '' });
 
-  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:1230';
+  const API_URL = import.meta.env.VITE_API_URL || '/api';
 
   const showMessage = (text, type = 'success') => {
     setMessage({ text, type });
@@ -33,7 +33,7 @@ const GenerateReport = ({ onReportGenerated }) => {
     setLoading(true);
     try {
       const token = localStorage.getItem('authToken');
-      const response = await fetch(`${API_URL}/api/breeding-farm/monthly-summary/generate/current`, {
+      const response = await fetch(`${API_URL}/breeding-farm/monthly-summary/generate/current`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -60,7 +60,7 @@ const GenerateReport = ({ onReportGenerated }) => {
     setLoading(true);
     try {
       const token = localStorage.getItem('authToken');
-      const response = await fetch(`${API_URL}/api/breeding-farm/monthly-summary/generate/last-month`, {
+      const response = await fetch(`${API_URL}/breeding-farm/monthly-summary/generate/last-month`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -87,7 +87,7 @@ const GenerateReport = ({ onReportGenerated }) => {
     setLoading(true);
     try {
       const token = localStorage.getItem('authToken');
-      const response = await fetch(`${API_URL}/api/breeding-farm/monthly-summary/generate/${selectedYear}/${selectedMonth}`, {
+      const response = await fetch(`${API_URL}/breeding-farm/monthly-summary/generate/${selectedYear}/${selectedMonth}`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -115,7 +115,7 @@ const GenerateReport = ({ onReportGenerated }) => {
     setLoading(true);
     try {
       const token = localStorage.getItem('authToken');
-      const response = await fetch(`${API_URL}/api/breeding-farm/monthly-summary/generate/range`, {
+      const response = await fetch(`${API_URL}/breeding-farm/monthly-summary/generate/range`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,

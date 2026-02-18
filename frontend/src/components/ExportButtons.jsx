@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import './ExportButtons.css';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:1230';
+const API_URL = import.meta.env.VITE_API_URL || '/api';
 
 const ExportButtons = ({ type, params = {} }) => {
   const downloadFile = async (url, filename) => {

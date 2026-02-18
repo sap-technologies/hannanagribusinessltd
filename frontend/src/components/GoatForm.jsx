@@ -49,7 +49,7 @@ const GoatForm = ({ onSubmit, editingGoat, onCancel, goats = [] }) => {
           ? editingGoat.photo_url 
           : editingGoat.photo_url.startsWith('data:') 
             ? editingGoat.photo_url
-            : `${import.meta.env.VITE_API_URL || 'http://localhost:1230'}${editingGoat.photo_url}`;
+            : `${(import.meta.env.VITE_API_URL || '/api').replace('/api', '')}${editingGoat.photo_url}`;
         setPhotoPreview(photoUrl);
       }
     }

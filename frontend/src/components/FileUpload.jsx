@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './FileUpload.css';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:1230';
+const API_URL = import.meta.env.VITE_API_URL || '/api';
 
 const FileUpload = ({ goatId, onUploadSuccess }) => {
   const [uploading, setUploading] = useState(false);
