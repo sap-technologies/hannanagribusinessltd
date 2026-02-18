@@ -62,12 +62,12 @@ class ReminderService {
   async checkVaccinationReminders() {
     // Get vaccination records where next dose is within 7 days
     const upcomingVaccinations = await sql`
-      SELECT v.*, g.goat_tag, g.goat_id
+      SELECT v.*, g.goat_id
       FROM vaccination_records v
       JOIN goats g ON v.goat_id = g.goat_id
       WHERE v.next_vaccination_date IS NOT NULL
       AND v.next_vaccination_date BETWEEN CURRENT_DATE AND CURRENT_DATE + INTERVAL '7 days'
-      AND g.status = 'active'
+      AND g.status = 'Active'
     `;
     
     const reminders = [];
@@ -86,7 +86,7 @@ class ReminderService {
           referenceId: vac.vaccination_id,
           referenceTable: 'vaccination_records',
           reminderDate: vac.next_vaccination_date,
-          title: `Vaccination due for ${vac.goat_tag}`,
+          title: `Vaccination due for ${vac.goat_id}`,
           description: `Next ${vac.vaccine_type} vaccination due`
         });
         reminders.push(reminder);
@@ -102,19 +102,16 @@ class ReminderService {
   async checkBreedingReminders() {
     // Get breeding records where kidding is expected within 30 days (pregnancy ~150 days)
     const upcomingBirths = await sql`
-      SELECT b.*, g.goat_tag, g.goat_id
+      SELECT b.*, g.goat_id
       FROM breeding_records b
       JOIN goats g ON b.doe_id = g.goat_id
-      WHERE b.outcome = 'pregnant'
-      AND b.breeding_date + INTERVAL '120 days' BETWEEN CURRENT_DATE AND CURRENT_DATE + INTERVAL '30 days'
-      AND g.status = 'active'
+      WHERE b.actual_kidding_date IS NULL
+      AND b.expected_kidding_date BETWEEN CURRENT_DATE AND CURRENT_DATE + INTERVAL '30 days'
+      AND g.status = 'Active'
     `;
     
     const reminders = [];
     for (const breeding of upcomingBirths) {
-      const expectedDate = new Date(breeding.breeding_date);
-      expectedDate.setDate(expectedDate.getDate() + 150); // Average goat pregnancy
-      
       // Check if reminder already exists
       const [existing] = await sql`
         SELECT * FROM reminders
@@ -128,8 +125,8 @@ class ReminderService {
           type: 'breeding',
           referenceId: breeding.breeding_id,
           referenceTable: 'breeding_records',
-          reminderDate: expectedDate.toISOString().split('T')[0],
-          title: `Kidding expected for ${breeding.goat_tag}`,
+          reminderDate: breeding.expected_kidding_date,
+          title: `Kidding expected for ${breeding.goat_id}`,
           description: `Pregnancy check and preparation needed`
         });
         reminders.push(reminder);
@@ -145,12 +142,12 @@ class ReminderService {
   async checkHealthAlerts() {
     // Get recent health records with ongoing treatments
     const ongoingTreatments = await sql`
-      SELECT h.*, g.goat_tag, g.goat_id
+      SELECT h.*, g.goat_id
       FROM health_records h
       JOIN goats g ON h.goat_id = g.goat_id
       WHERE h.recovery_status IN ('ongoing', 'monitoring')
       AND h.treatment_date >= CURRENT_DATE - INTERVAL '30 days'
-      AND g.status = 'active'
+      AND g.status = 'Active'
     `;
     
     const alerts = [];
@@ -172,7 +169,7 @@ class ReminderService {
             referenceId: health.health_id,
             referenceTable: 'health_records',
             reminderDate: new Date().toISOString().split('T')[0],
-            title: `Health follow-up for ${health.goat_tag}`,
+            title: `Health follow-up for ${health.goat_id}`,
             description: `Check recovery status for ${health.illness_type}`
           });
           alerts.push(reminder);
