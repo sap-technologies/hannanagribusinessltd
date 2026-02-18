@@ -39,6 +39,9 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 1230;
 
+// Trust proxy - required when behind Render/Heroku/etc for rate limiting and IP detection
+app.set('trust proxy', 1);
+
 // Set up helmet for security headers - protects against common vulnerabilities
 app.use(helmet());
 
