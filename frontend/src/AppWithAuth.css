@@ -1,6 +1,8 @@
 .app-with-auth {
   min-height: 100vh;
   background: #f5f7fa;
+  display: flex;
+  flex-direction: column;
 }
 
 .auth-loading {
@@ -243,6 +245,7 @@
 
 .auth-content {
   padding: 0;
+  flex: 1;
 }
 
 /* Mobile Responsive */

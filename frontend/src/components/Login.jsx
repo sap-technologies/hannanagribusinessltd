@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { authService } from '../services/authService';
 import logo from '../assets/logo.png';
+import Footer from './Footer';
 import './Login.css';
 
 function Login() {
@@ -91,6 +92,7 @@ function Login() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

@@ -7,6 +7,7 @@ import NotificationsPage from './components/NotificationsPage';
 import RemindersPage from './components/RemindersPage';
 import GlobalSearch from './components/GlobalSearch';
 import HelpPage from './components/HelpPage';
+import Footer from './components/Footer';
 import { authService } from './services/authService';
 import logo from './assets/logo.png';
 
@@ -279,6 +280,8 @@ function AppWithAuth() {
       {showSearch && (
         <GlobalSearch onClose={() => setShowSearch(false)} />
       )}
+      
+      <Footer />
     </div>
   );
 }
