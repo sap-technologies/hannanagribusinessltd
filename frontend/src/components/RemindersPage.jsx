@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { notificationService } from '../services/api';
 import './RemindersPage.css';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:1230';
+
 const RemindersPage = ({ onBack }) => {
   const [reminders, setReminders] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -16,7 +18,7 @@ const RemindersPage = ({ onBack }) => {
     setLoading(true);
     try {
       const token = localStorage.getItem('authToken');
-      const response = await fetch('/api/reminders', {
+      const response = await fetch(`${API_URL}/api/reminders`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       const data = await response.json();
@@ -39,7 +41,7 @@ const RemindersPage = ({ onBack }) => {
 
     try {
       const token = localStorage.getItem('authToken');
-      const response = await fetch(`/api/reminders/${id}/complete`, {
+      const response = await fetch(`${API_URL}/api/reminders/${id}/complete`, {
         method: 'PUT',
         headers: { 
           Authorization: `Bearer ${token}`,
@@ -64,7 +66,7 @@ const RemindersPage = ({ onBack }) => {
     setLoading(true);
     try {
       const token = localStorage.getItem('authToken');
-      const response = await fetch('/api/reminders/daily-checks', {
+      const response = await fetch(`${API_URL}/api/reminders/daily-checks`, {
         method: 'POST',
         headers: { 
           Authorization: `Bearer ${token}`,
