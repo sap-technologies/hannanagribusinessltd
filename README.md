@@ -1,72 +1,58 @@
-# Hannan Agribusiness Limited - Goat Management System
+# Hannan Agribusiness Limited - Business Management System
 
-A comprehensive goat breeding farm management system for tracking and managing goat inventory.
+A comprehensive management platform for Hannan Agribusiness operations including goat breeding farm, matooke cultivation, and coffee production projects.
 
-## Project Overview
+## What This Does
 
-This application helps Hannan Breeding Farm to:
-- Register and track goats with detailed information
-- Manage breeding records (mother/father relationships)
-- Monitor goat production and status
-- Maintain comprehensive goat database
+This is a full-stack business management system built specifically for Hannan Agribusiness Limited. It handles:
+
+- **Breeding Farm**: Complete goat inventory, breeding records, health tracking, feeding schedules, vaccination records, sales, and expenses
+- **Matooke Project**: Banana farming operations and production management
+- **Coffee Project**: Coffee cultivation tracking and production analytics
+
+The system provides real-time monitoring, automated notifications, comprehensive reporting, and data export capabilities.
 
 ## Tech Stack
 
-- **Frontend**: React with Vite
-- **Backend**: Node.js with Express
-- **Database**: PostgreSQL
-- **Architecture**: MVP (Model-View-Presenter)
+- **Frontend**: React 18.2 + Vite (fast development builds)
+- **Backend**: Node.js + Express (REST API)
+- **Database**: PostgreSQL (via Supabase)
+- **Storage**: Supabase Storage (image uploads)
+- **Auth**: JWT-based authentication with bcrypt password hashing
+- **Architecture**: MVP pattern (Model-View-Presenter)
 
-## Project Structure
+## Quick Start
 
-```
-hannan-agribusiness-limited/
-├── backend/          # Node.js API server
-├── frontend/         # React application
-└── README.md
-```
+### What You Need
+- Node.js 18+ installed
+- Access to the Supabase database (credentials in .env)
+- npm or yarn package manager
 
-## Getting Started
+### Running Locally
 
-### Prerequisites
-- Node.js (v18 or higher)
-- PostgreSQL (v14 or higher)
-- npm or yarn
-
-### Backend Setup
+**Backend** (runs on port 1230):
 ```bash
 cd backend
 npm install
 npm run dev
 ```
 
-### Frontend Setup
+**Frontend** (runs on port 2340):
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
 
-## Features
+Open http://localhost:2340 in your browser. Default login credentials are in the database.
 
-- Goat Registration with comprehensive details
-- Parent tracking (Mother/Father IDs)
-- Weight monitoring
-- Status management
-- Production type categorization
-- Source tracking
-- Detailed remarks system
+## Main Features
 
-## Goat Data Fields
-
-- Goat ID
-- Breed
-- Sex
-- Date of Birth
-- Production Type
-- Source
-- Mother ID
-- Father ID
-- Status
-- Weight
-- Remarks
+### Breeding Farm Management
+- Comprehensive goat inventory with photos
+- Parent-child relationships (breeding records)
+- Health monitoring and vaccination schedules
+- Feeding records with cost tracking
+- Kid growth tracking from birth
+- Sales management (breeding stock and meat goats)
+- Monthly financial summaries

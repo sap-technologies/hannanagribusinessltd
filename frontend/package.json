@@ -2,6 +2,7 @@
   "name": "hannan-agribusiness-frontend",
   "private": true,
   "version": "1.0.0",
+  "description": "React-based frontend application for managing agribusiness operations including breeding farm, matooke & coffee projects",
   "type": "module",
   "scripts": {
     "dev": "vite",

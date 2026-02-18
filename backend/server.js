@@ -9,7 +9,6 @@ import compression from 'compression';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-// Import routes
 import goatRoutes from './views/goatRoutes.js';
 import breedingRoutes from './views/breedingRoutes.js';
 import kidGrowthRoutes from './views/kidGrowthRoutes.js';
@@ -29,14 +28,9 @@ import reminderRoutes from './routes/reminderRoutes.js';
 import reportRoutes from './routes/reportRoutes.js';
 import uploadRoutes from './routes/uploadRoutes.js';
 import searchRoutes from './routes/searchRoutes.js';
-
-// Import middleware
 import { verifyToken } from './middleware/auth.js';
-
-// Import services
 import notificationService from './services/notificationService.js';
 
-// ES module __dirname equivalent
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -45,23 +39,25 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 1230;
 
-// ========== SECURITY MIDDLEWARE ==========
-// Helmet for security headers
+// Set up helmet for security headers - protects against common vulnerabilities
 app.use(helmet());
 
-// CORS configuration - restrict to frontend origin
+// Configure CORS to allow requests from our frontend
+// In production, this will use the FRONTEND_URL env variable
 const corsOptions = {
   origin: process.env.FRONTEND_URL || 'http://localhost:2340',
-  credentials: true, // Allow cookies
+  credentials: true,
   optionsSuccessStatus: 200
 };
 app.use(cors(corsOptions));
 
-// Compression middleware - compress all HTTP responses
+// Enable gzip compression for responses
+// This significantly reduces bandwidth usage for JSON responses
 app.use(compression({
-  level: 6, // Compression level (0-9, higher = better but slower)
-  threshold: 1024, // Only compress responses larger than 1KB
+  level: 6,
+  threshold: 1024, // only compress if response is bigger than 1KB
   filter: (req, res) => {
+    // skip compression if client requests it
     if (req.headers['x-no-compression']) {
       return false;
     }
@@ -69,31 +65,30 @@ app.use(compression({
   }
 }));
 
-// Rate limiting - prevent brute force attacks
+// General API rate limiting - 100 requests per 15 minutes per IP
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // Limit each IP to 100 requests per windowMs
+  windowMs: 15 * 60 * 1000,
+  max: 100,
   message: 'Too many requests from this IP, please try again later.'
 });
 app.use('/api/', limiter);
 
-// Stricter rate limit for auth endpoints
+// Stricter rate limiting for auth endpoints to prevent brute force attacks
 const authLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 5, // Limit to 5 login attempts
+  windowMs: 15 * 60 * 1000,
+  max: 5, // only 5 login attempts per 15 minutes
   message: 'Too many login attempts, please try again later.'
 });
 
-// Body parser and cookie parser
+// Parse incoming requests
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-// Serve static files (uploaded files) - uploads folder is at project root
+// Serve uploaded files (goat photos, reports, etc.)
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
-// ========== PUBLIC ROUTES ==========
-// Health check route (no auth required)
+// Simple health check endpoint for monitoring
 app.get('/api/health', (req, res) => {
   res.status(200).json({
     success: true,
@@ -103,27 +98,18 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// ========== AUTHENTICATION ROUTES ==========
+// Authentication routes (login, register) - with rate limiting
 app.use('/api/auth', authLimiter, authRoutes);
 
-// ========== PROTECTED ROUTES (Require Authentication) ==========
-// User management (admin only)
+// All routes below require authentication via JWT token
 app.use('/api/users', usersRoutes);
-
-// Notifications and reminders
 app.use('/api/notifications', notificationRoutes);
 app.use('/api/reminders', reminderRoutes);
-
-// Reports (PDF and Excel exports)
 app.use('/api/reports', verifyToken, reportRoutes);
-
-// File uploads
 app.use('/api/upload', verifyToken, uploadRoutes);
-
-// Search and filtering
 app.use('/api/search', verifyToken, searchRoutes);
 
-// Breeding Farm Project (Goats & Breeding)
+// Breeding farm routes
 app.use('/api/breeding-farm/goats', verifyToken, goatRoutes);
 app.use('/api/breeding-farm/breeding', verifyToken, breedingRoutes);
 app.use('/api/breeding-farm/kid-growth', verifyToken, kidGrowthRoutes);

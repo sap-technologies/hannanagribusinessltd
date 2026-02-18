@@ -1,8 +1,10 @@
 import axios from 'axios';
 
-// Use environment variable for API URL, fallback to relative path in development
+// API configuration - switches between local dev and production automatically
+// The environment variable is set differently for dev vs. production builds
 const API_BASE_URL = import.meta.env.VITE_API_URL || '/api';
 
+// Create axios instance with default config
 const apiClient = axios.create({
   baseURL: API_BASE_URL,
   headers: {
@@ -10,7 +12,7 @@ const apiClient = axios.create({
   },
 });
 
-// Add authentication token to all requests
+// Request interceptor - automatically adds JWT token to all outgoing requests
 apiClient.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('authToken');
@@ -24,12 +26,12 @@ apiClient.interceptors.request.use(
   }
 );
 
-// Handle authentication errors
+// Response interceptor - handles 401 errors by logging user out
 apiClient.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-      // Unauthorized - clear token and redirect to login
+      // Token expired or invalid - clear everything and go back to login
       localStorage.removeItem('authToken');
       localStorage.removeItem('user');
       window.location.href = '/';

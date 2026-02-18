@@ -1,9 +1,9 @@
 import jwt from 'jsonwebtoken';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-this-in-production';
-const JWT_EXPIRES_IN = '24h';
+const JWT_EXPIRES_IN = '24h'; // tokens are valid for 24 hours
 
-// Generate JWT token
+// Creates a JWT token for authenticated users
 export const generateToken = (userId, email, role, fullName = null) => {
   return jwt.sign(
     { userId, email, role, fullName },
@@ -12,10 +12,11 @@ export const generateToken = (userId, email, role, fullName = null) => {
   );
 };
 
-// Verify JWT token middleware
+// Middleware that checks if the request has a valid JWT token
+// Token can be in Authorization header or in cookies
 export const verifyToken = async (req, res, next) => {
   try {
-    // Get token from header or cookie
+    // Extract token from Authorization header (Bearer token) or cookies
     const token = req.headers.authorization?.replace('Bearer ', '') || req.cookies?.token;
     
     if (!token) {
@@ -25,9 +26,9 @@ export const verifyToken = async (req, res, next) => {
       });
     }
     
-    // Verify token
+    // Verify the token and decode user info
     const decoded = jwt.verify(token, JWT_SECRET);
-    req.user = decoded; // Add user info to request
+    req.user = decoded; // attach decoded user info to request object
     next();
     
   } catch (error) {
@@ -44,7 +45,8 @@ export const verifyToken = async (req, res, next) => {
   }
 };
 
-// Check user role middleware
+// Higher-order middleware for role-based access control
+// Usage: checkRole('admin', 'manager') only allows those roles
 export const checkRole = (...roles) => {
   return (req, res, next) => {
     if (!req.user) {
@@ -65,8 +67,6 @@ export const checkRole = (...roles) => {
   };
 };
 
-// Admin only middleware
+// Convenience middleware for common role checks
 export const adminOnly = checkRole('admin');
-
-// Manager or Admin middleware
 export const managerOrAdmin = checkRole('admin', 'manager');
