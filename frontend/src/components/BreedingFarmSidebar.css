@@ -273,11 +273,16 @@
   }
 
   .sidebar-header {
-    position: sticky;
+    position: absolute;
     top: 75px;
+    left: 0;
+    right: 0;
     background: linear-gradient(180deg, #1e3a8a 0%, #1e40af 100%);
     z-index: 10;
-    margin-top: 75px;
+  }
+
+  .sidebar-nav {
+    margin-top: 150px;
   }
 }
 
@@ -297,7 +302,10 @@
   .sidebar-header {
     padding: 14px;
     top: 62px;
-    margin-top: 62px;
+  }
+
+  .sidebar-nav {
+    margin-top: 130px;
   }
 
   .section-header {
@@ -338,7 +346,10 @@
   .sidebar-header {
     padding: 12px;
     top: 52px;
-    margin-top: 52px;
+  }
+
+  .sidebar-nav {
+    margin-top: 120px;
   }
 
   .section-header {
