@@ -7,7 +7,7 @@ const GoatForm = ({ onSubmit, editingGoat, onCancel, goats = [] }) => {
     breed: '',
     sex: 'Male',
     date_of_birth: '',
-    production_type: 'Dual Purpose',
+    production_type: '',
     source: '',
     mother_id: '',
     father_id: '',
@@ -128,7 +128,7 @@ const GoatForm = ({ onSubmit, editingGoat, onCancel, goats = [] }) => {
         breed: '',
         sex: 'Male',
         date_of_birth: '',
-        production_type: 'Dual Purpose',
+        production_type: '',
         source: '',
         mother_id: '',
         father_id: '',
@@ -216,6 +216,7 @@ const GoatForm = ({ onSubmit, editingGoat, onCancel, goats = [] }) => {
               onChange={handleChange}
               required
             >
+              <option value="" disabled>Select Production Type</option>
               <option value="Meat">Meat</option>
               <option value="Dairy">Dairy</option>
               <option value="Breeding">Breeding</option>
