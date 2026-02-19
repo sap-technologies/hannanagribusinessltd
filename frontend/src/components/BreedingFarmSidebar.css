@@ -276,8 +276,11 @@
   }
 
   .sidebar-header {
+    position: sticky;
+    top: 75px;
     background: linear-gradient(180deg, #1e3a8a 0%, #1e40af 100%);
     flex-shrink: 0;
+    z-index: 10;
   }
 
   .sidebar-nav {
@@ -304,6 +307,7 @@
   .sidebar-header {
     padding: 14px;
     flex-shrink: 0;
+    top: 60px;
   }
 
   .section-header {
@@ -345,6 +349,7 @@
   .sidebar-header {
     padding: 12px;
     flex-shrink: 0;
+    top: 50px;
   }
 
   .section-header {
