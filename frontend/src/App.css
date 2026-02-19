@@ -266,6 +266,8 @@
   margin-left: 280px;
   min-height: 100vh;
   transition: margin-left 0.3s ease;
+  position: relative;
+  z-index: 1;
 }
 
 /* When sidebar is collapsed */
@@ -277,6 +279,10 @@
 @media (max-width: 1024px) {
   .breeding-farm-content {
     margin-left: 0;
+    width: 100%;
+    display: block;
+    visibility: visible;
+    opacity: 1;
   }
 }
 
