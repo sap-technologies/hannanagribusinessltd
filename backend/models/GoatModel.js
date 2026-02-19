@@ -99,12 +99,12 @@ class GoatModel {
       sex,
       date_of_birth,
       production_type,
-      source,
-      mother_id,
-      father_id,
+      source || null,
+      mother_id || null,
+      father_id || null,
       status,
-      weight,
-      remarks,
+      weight || null,
+      remarks || null,
       goatId
     ];
 

@@ -82,6 +82,14 @@ class GoatPresenter {
       // Separate photo file from goat data
       const { photoFile, ...goatInfo } = goatData;
       
+      // Log what we're sending
+      console.log('📤 Sending update request:', {
+        id,
+        hasPhotoFile: !!photoFile,
+        goatInfoKeys: Object.keys(goatInfo),
+        photoFileType: photoFile?.constructor?.name
+      });
+      
       // Update goat record
       const result = await goatService.updateGoat(id, goatInfo);
       

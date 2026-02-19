@@ -83,6 +83,12 @@ router.post('/', async (req, res) => {
 // PUT update goat
 router.put('/:id', async (req, res) => {
   try {
+    console.log('📝 Update goat request:', {
+      goatId: req.params.id,
+      bodyKeys: Object.keys(req.body),
+      hasUser: !!req.user
+    });
+    
     const performedBy = req.user?.userId || null;
     const performedByName = req.user?.fullName || req.user?.email || 'Unknown User';
     const result = await GoatPresenter.updateGoat(req.params.id, req.body, performedBy, performedByName);
@@ -90,11 +96,15 @@ router.put('/:id', async (req, res) => {
     if (result.success) {
       res.status(200).json(result);
     } else {
-      console.error('Failed to update goat:', result.message);
+      console.error('❌ Failed to update goat:', {
+        goatId: req.params.id,
+        message: result.message,
+        error: result.error
+      });
       res.status(400).json(result);
     }
   } catch (error) {
-    console.error('Error in update goat route:', error);
+    console.error('💥 Error in update goat route:', error);
     res.status(500).json({
       success: false,
       message: 'Internal server error while updating goat',

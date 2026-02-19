@@ -55,12 +55,21 @@ class GoatPresenter {
     try {
       console.log('Creating goat with data:', JSON.stringify(goatData, null, 2));
       
+      // Sanitize data: convert empty strings to null for optional fields
+      const sanitizedData = { ...goatData };
+      const optionalFields = ['source', 'mother_id', 'father_id', 'weight', 'remarks', 'production_type'];
+      optionalFields.forEach(field => {
+        if (sanitizedData[field] === '' || sanitizedData[field] === undefined) {
+          sanitizedData[field] = null;
+        }
+      });
+      
       // Validation
-      const validationError = this.validateGoatData(goatData);
+      const validationError = this.validateGoatData(sanitizedData);
       if (validationError) {
         console.error('Validation failed for new goat:', {
           error: validationError,
-          receivedData: goatData
+          receivedData: sanitizedData
         });
         return {
           success: false,
@@ -70,17 +79,17 @@ class GoatPresenter {
       }
 
       // Check if goat ID already exists
-      const existingGoat = await GoatModel.getGoatById(goatData.goat_id);
+      const existingGoat = await GoatModel.getGoatById(sanitizedData.goat_id);
       if (existingGoat) {
         return {
           success: false,
-          message: `Goat with ID ${goatData.goat_id} already exists`
+          message: `Goat with ID ${sanitizedData.goat_id} already exists`
         };
       }
 
       // Validate parent IDs if provided
-      if (goatData.mother_id) {
-        const mother = await GoatModel.getGoatById(goatData.mother_id);
+      if (sanitizedData.mother_id) {
+        const mother = await GoatModel.getGoatById(sanitizedData.mother_id);
         if (!mother || mother.sex !== 'Female') {
           return {
             success: false,
@@ -89,8 +98,8 @@ class GoatPresenter {
         }
       }
 
-      if (goatData.father_id) {
-        const father = await GoatModel.getGoatById(goatData.father_id);
+      if (sanitizedData.father_id) {
+        const father = await GoatModel.getGoatById(sanitizedData.father_id);
         if (!father || father.sex !== 'Male') {
           return {
             success: false,
@@ -99,7 +108,7 @@ class GoatPresenter {
         }
       }
 
-      const newGoat = await GoatModel.createGoat(goatData);
+      const newGoat = await GoatModel.createGoat(sanitizedData);
       
       // Run auto-integration service (vaccinations, health checks, growth tracking, etc.)
       // This runs asynchronously to not block the response
@@ -128,6 +137,23 @@ class GoatPresenter {
   // Update goat
   async updateGoat(goatId, goatData, performedBy = null, performedByName = null) {
     try {
+      // Log what we're receiving
+      console.log('🔍 UpdateGoat called with:', {
+        goatId,
+        dataKeys: Object.keys(goatData),
+        photoFilePresent: !!goatData.photoFile,
+        performedBy
+      });
+      
+      // Sanitize data: convert empty strings to null for optional fields
+      const sanitizedData = { ...goatData };
+      const optionalFields = ['source', 'mother_id', 'father_id', 'weight', 'remarks', 'production_type'];
+      optionalFields.forEach(field => {
+        if (sanitizedData[field] === '' || sanitizedData[field] === undefined) {
+          sanitizedData[field] = null;
+        }
+      });
+      
       // Check if goat exists
       const existingGoat = await GoatModel.getGoatById(goatId);
       if (!existingGoat) {
@@ -138,12 +164,15 @@ class GoatPresenter {
       }
 
       // Validation
-      const validationError = this.validateGoatData(goatData, true);
+      const validationError = this.validateGoatData(sanitizedData, true);
       if (validationError) {
-        console.error('Validation failed for goat update:', {
+        console.error('❌ Validation failed for goat update:', {
           goatId,
           error: validationError,
-          receivedData: goatData
+          receivedDataKeys: Object.keys(goatData),
+          problematicFields: Object.entries(goatData).filter(([k, v]) => 
+            v !== null && v !== undefined && v !== '' && typeof v === 'object' && !(v instanceof Date)
+          )
         });
         return {
           success: false,
@@ -152,9 +181,9 @@ class GoatPresenter {
       }
 
       // Track changes for detailed notification
-      const changes = this.detectChanges(existingGoat, goatData);
+      const changes = this.detectChanges(existingGoat, sanitizedData);
 
-      const updatedGoat = await GoatModel.updateGoat(goatId, goatData);
+      const updatedGoat = await GoatModel.updateGoat(goatId, sanitizedData);
       
       // Send notification to admins with details of what changed
       notificationHelper.notifyGoatUpdated(updatedGoat, changes, performedBy, performedByName).catch(err => 
@@ -167,7 +196,7 @@ class GoatPresenter {
         message: 'Goat updated successfully'
       };
     } catch (error) {
-      console.error('Error in updateGoat:', error);
+      console.error('💥 Error in updateGoat:', error);
       return {
         success: false,
         error: error.message,
