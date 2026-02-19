@@ -68,9 +68,10 @@ button {
     font-size: 14px;
   }
   
-  /* Prevent horizontal overflow */
+  /* Prevent horizontal overflow but allow vertical scrolling */
   body {
     overflow-x: hidden;
+    overflow-y: auto;
   }
   
   /* Ensure inputs are sized properly on mobile */
