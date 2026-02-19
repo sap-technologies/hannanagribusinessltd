@@ -120,7 +120,7 @@ const SalesMeatForm = ({ onSubmit, editingRecord, onCancel, goats = [] }) => {
 
             <div className="sales-meat-form-group">
               <label>
-                Buyer Name <span className="required">*</span>
+                Buyer Name
               </label>
               <input
                 type="text"
@@ -128,7 +128,6 @@ const SalesMeatForm = ({ onSubmit, editingRecord, onCancel, goats = [] }) => {
                 value={formData.buyer}
                 onChange={handleChange}
                 placeholder="Enter buyer name"
-                required
               />
             </div>
           </div>

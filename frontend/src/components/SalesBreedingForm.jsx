@@ -143,14 +143,13 @@ const SalesBreedingForm = ({ onSubmit, editingRecord, onCancel, goats = [] }) =>
           </div>
 
           <div className="form-group">
-            <label>Buyer *</label>
+            <label>Buyer</label>
             <input
               type="text"
               name="buyer"
               value={formData.buyer}
               onChange={handleChange}
               placeholder="Enter buyer name"
-              required
             />
           </div>
         </div>

@@ -107,28 +107,26 @@ const ExpensesForm = ({ onSubmit, editingRecord, onCancel }) => {
 
         <div className="form-row">
           <div className="form-group full-width">
-            <label>Description *</label>
+            <label>Description</label>
             <textarea
               name="description"
               value={formData.description}
               onChange={handleChange}
               placeholder="Enter expense description"
               rows="3"
-              required
             ></textarea>
           </div>
         </div>
 
         <div className="form-row">
           <div className="form-group">
-            <label>Paid By *</label>
+            <label>Paid By</label>
             <input
               type="text"
               name="paid_by"
               value={formData.paid_by}
               onChange={handleChange}
               placeholder="Enter payer name"
-              required
             />
           </div>
 

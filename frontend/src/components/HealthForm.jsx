@@ -105,14 +105,13 @@ const HealthForm = ({ onSubmit, editingRecord, onCancel, goats = [] }) => {
       </div>
 
       <div style={styles.formGroup}>
-        <label>Problem Observed *</label>
+        <label>Problem Observed</label>
         <textarea
           name="problem_observed"
           value={formData.problem_observed}
           onChange={handleChange}
           style={styles.textarea}
           rows="3"
-          required
           placeholder="Describe the health issue or symptoms observed"
         />
       </div>

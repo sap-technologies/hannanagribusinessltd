@@ -272,10 +272,9 @@ class GoatPresenter {
       return 'Date of birth is required';
     }
 
-    if (!goatData.production_type) {
-      return 'Production type is required';
-    }
-
+    // Production type is optional now
+    // Status defaults to 'Active' if not provided
+    
     if (goatData.weight && (isNaN(goatData.weight) || goatData.weight < 0)) {
       return 'Weight must be a positive number';
     }

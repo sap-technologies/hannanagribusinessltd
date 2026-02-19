@@ -272,12 +272,11 @@ const GoatForm = ({ onSubmit, editingGoat, onCancel, goats = [] }) => {
           </div>
 
           <div className="form-group">
-            <label>Status *</label>
+            <label>Status</label>
             <select
               name="status"
               value={formData.status}
               onChange={handleChange}
-              required
             >
               <option value="Active">Active</option>
               <option value="Sold">Sold</option>
