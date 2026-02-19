@@ -1,10 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import BackButton from './BackButton';
 import './HelpPage.css';
 
 function HelpPage({ onClose }) {
   const [activeSection, setActiveSection] = useState('overview');
   const [searchTerm, setSearchTerm] = useState('');
+  const mainContentRef = useRef(null);
+
+  // Scroll to top when section changes
+  useEffect(() => {
+    if (mainContentRef.current) {
+      mainContentRef.current.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+  }, [activeSection]);
 
   const sections = {
     overview: {
@@ -621,7 +632,7 @@ function HelpPage({ onClose }) {
           </nav>
         </aside>
 
-        <main className="help-main">
+        <main className="help-main" ref={mainContentRef}>
           {!searchTerm ? (
             <div className="help-section">
               <div className="section-header">
