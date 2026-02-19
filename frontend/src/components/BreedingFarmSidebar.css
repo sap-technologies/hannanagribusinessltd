@@ -241,7 +241,10 @@
     transform: translateX(-100%);
     top: 0;
     height: 100vh;
+    padding-top: 75px;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
   }
 
   .breeding-farm-sidebar.mobile-open {
@@ -273,16 +276,14 @@
   }
 
   .sidebar-header {
-    position: absolute;
-    top: 75px;
-    left: 0;
-    right: 0;
     background: linear-gradient(180deg, #1e3a8a 0%, #1e40af 100%);
-    z-index: 10;
+    flex-shrink: 0;
   }
 
   .sidebar-nav {
-    margin-top: 150px;
+    flex: 1;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 }
 
@@ -292,6 +293,7 @@
     top: 0;
     height: 100vh;
     width: 300px;
+    padding-top: 60px;
     box-sizing: border-box;
   }
 
@@ -301,11 +303,7 @@
 
   .sidebar-header {
     padding: 14px;
-    top: 62px;
-  }
-
-  .sidebar-nav {
-    margin-top: 130px;
+    flex-shrink: 0;
   }
 
   .section-header {
@@ -336,6 +334,7 @@
     top: 0;
     height: 100vh;
     width: 280px;
+    padding-top: 50px;
     box-sizing: border-box;
   }
 
@@ -345,11 +344,7 @@
 
   .sidebar-header {
     padding: 12px;
-    top: 52px;
-  }
-
-  .sidebar-nav {
-    margin-top: 120px;
+    flex-shrink: 0;
   }
 
   .section-header {
