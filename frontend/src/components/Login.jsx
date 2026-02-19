@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { authService } from '../services/authService';
+import { toast } from 'react-toastify';
 import logo from '../assets/logo.png';
 import Footer from './Footer';
 import './Login.css';
@@ -20,8 +21,21 @@ function Login() {
       const response = await authService.login(email, password);
       
       if (response.success) {
-        // Redirect to main app
-        window.location.href = '/';
+        // Show success message
+        const userName = response.data?.user?.name || 'User';
+        toast.success(`Welcome back, ${userName}! 🎉`, {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+        
+        // Small delay to show toast before redirect
+        setTimeout(() => {
+          window.location.href = '/';
+        }, 500);
       } else {
         setError(response.message || 'Login failed');
       }
