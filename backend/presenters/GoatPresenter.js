@@ -53,12 +53,19 @@ class GoatPresenter {
   // Create new goat
   async createGoat(goatData, user = null) {
     try {
+      console.log('Creating goat with data:', JSON.stringify(goatData, null, 2));
+      
       // Validation
       const validationError = this.validateGoatData(goatData);
       if (validationError) {
+        console.error('Validation failed for new goat:', {
+          error: validationError,
+          receivedData: goatData
+        });
         return {
           success: false,
-          message: validationError
+          message: validationError,
+          field: this.getValidationField(validationError)
         };
       }
 
@@ -291,6 +298,16 @@ class GoatPresenter {
       return 'Weight must be a positive number';
     }
 
+    return null;
+  }
+
+  // Helper to identify which field caused validation error
+  getValidationField(errorMessage) {
+    if (errorMessage.includes('Goat ID')) return 'goat_id';
+    if (errorMessage.includes('Breed')) return 'breed';
+    if (errorMessage.includes('Sex')) return 'sex';
+    if (errorMessage.includes('Date of birth')) return 'date_of_birth';
+    if (errorMessage.includes('Weight')) return 'weight';
     return null;
   }
 }

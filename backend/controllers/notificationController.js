@@ -53,6 +53,7 @@ class NotificationController {
         data: { count }
       });
     } catch (error) {
+      console.error('Error getting unread count:', error);
       res.status(500).json({
         success: false,
         message: 'Failed to get unread count',

@@ -53,13 +53,39 @@ export const goatService = {
   },
 
   createGoat: async (goatData) => {
-    const response = await apiClient.post('/breeding-farm/goats', goatData);
-    return response.data;
+    try {
+      const response = await apiClient.post('/breeding-farm/goats', goatData);
+      return response.data;
+    } catch (error) {
+      console.error('API Error creating goat:', {
+        status: error.response?.status,
+        message: error.response?.data?.message,
+        data: error.response?.data
+      });
+      // Return error in expected format
+      return {
+        success: false,
+        message: error.response?.data?.message || error.message || 'Failed to create goat'
+      };
+    }
   },
 
   updateGoat: async (id, goatData) => {
-    const response = await apiClient.put(`/breeding-farm/goats/${id}`, goatData);
-    return response.data;
+    try {
+      const response = await axios.put(`${API_URL}/breeding-farm/goats/${id}`, goatData);
+      return response.data;
+    } catch (error) {
+      console.error('API Error updating goat:', {
+        status: error.response?.status,
+        message: error.response?.data?.message,
+        data: error.response?.data
+      });
+      // Return error in expected format
+      return {
+        success: false,
+        message: error.response?.data?.message || error.message || 'Failed to update goat'
+      };
+    }
   },
 
   deleteGoat: async (id) => {

@@ -52,11 +52,22 @@ class GoatPresenter {
         await this.loadGoats(); // Reload list
         return true;
       } else {
-        this.view.showError(result.message);
+        // Show specific validation error if available
+        const errorMsg = result.message || 'Failed to register goat';
+        console.error('Create goat failed:', result);
+        this.view.showError(errorMsg);
         return false;
       }
     } catch (error) {
-      this.view.showError('Failed to register goat: ' + error.message);
+      console.error('Create goat error:', error);
+      // Extract more specific error message if available
+      let errorMessage = 'Failed to register goat';
+      if (error.response?.data?.message) {
+        errorMessage = error.response.data.message;
+      } else if (error.message) {
+        errorMessage = error.message;
+      }
+      this.view.showError(errorMessage);
       return false;
     } finally {
       this.view.setLoading(false);
@@ -91,11 +102,22 @@ class GoatPresenter {
         await this.loadGoats(); // Reload list
         return true;
       } else {
-        this.view.showError(result.message);
+        // Show specific validation error if available
+        const errorMsg = result.message || 'Failed to update goat';
+        console.error('Update goat failed:', result);
+        this.view.showError(errorMsg);
         return false;
       }
     } catch (error) {
-      this.view.showError('Failed to update goat: ' + error.message);
+      console.error('Update goat error:', error);
+      // Extract more specific error message if available
+      let errorMessage = 'Failed to update goat';
+      if (error.response?.data?.message) {
+        errorMessage = error.response.data.message;
+      } else if (error.message) {
+        errorMessage = error.message;
+      }
+      this.view.showError(errorMessage);
       return false;
     } finally {
       this.view.setLoading(false);
