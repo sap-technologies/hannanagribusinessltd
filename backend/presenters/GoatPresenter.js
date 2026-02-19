@@ -133,6 +133,11 @@ class GoatPresenter {
       // Validation
       const validationError = this.validateGoatData(goatData, true);
       if (validationError) {
+        console.error('Validation failed for goat update:', {
+          goatId,
+          error: validationError,
+          receivedData: goatData
+        });
         return {
           success: false,
           message: validationError
@@ -260,22 +265,29 @@ class GoatPresenter {
       return 'Goat ID is required';
     }
 
-    if (!goatData.breed) {
-      return 'Breed is required';
-    }
-
-    if (!goatData.sex || !['Male', 'Female'].includes(goatData.sex)) {
-      return 'Sex must be either Male or Female';
-    }
-
-    if (!goatData.date_of_birth) {
-      return 'Date of birth is required';
+    // For new goats, require all essential fields
+    // For updates, only validate if fields are provided (not empty)
+    if (!isUpdate) {
+      if (!goatData.breed) {
+        return 'Breed is required';
+      }
+      if (!goatData.sex || !['Male', 'Female'].includes(goatData.sex)) {
+        return 'Sex must be either Male or Female';
+      }
+      if (!goatData.date_of_birth) {
+        return 'Date of birth is required';
+      }
+    } else {
+      // For updates, validate format only if provided
+      if (goatData.sex && !['Male', 'Female'].includes(goatData.sex)) {
+        return 'Sex must be either Male or Female';
+      }
     }
 
     // Production type is optional now
     // Status defaults to 'Active' if not provided
     
-    if (goatData.weight && (isNaN(goatData.weight) || goatData.weight < 0)) {
+    if (goatData.weight && goatData.weight !== '' && (isNaN(goatData.weight) || goatData.weight < 0)) {
       return 'Weight must be a positive number';
     }
 
