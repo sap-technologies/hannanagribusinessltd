@@ -1,6 +1,7 @@
 import BreedingModel from '../models/BreedingModel.js';
 import GoatModel from '../models/GoatModel.js';
 import notificationHelper from '../utils/notificationHelper.js';
+import reminderService from '../services/reminderService.js';
 
 // Presenter - Business logic layer for Breeding operations
 class BreedingPresenter {
@@ -72,6 +73,23 @@ class BreedingPresenter {
       notificationHelper.notifyBreedingCreated(newRecord, performedBy, performedByName).catch(err => 
         console.error('Failed to send notification:', err)
       );
+      
+      // Create manual reminder if requested
+      if (breedingData.setReminder && breedingData.reminderDate) {
+        try {
+          await reminderService.createManualReminder({
+            type: 'breeding',
+            referenceId: newRecord.breeding_id,
+            referenceTable: 'breeding_records',
+            reminderDate: breedingData.reminderDate,
+            title: breedingData.reminderTitle,
+            description: breedingData.reminderDescription,
+            goatId: breedingData.doe_id
+          });
+        } catch (reminderError) {
+          console.error('Failed to create reminder:', reminderError);
+        }
+      }
       
       return {
         success: true,

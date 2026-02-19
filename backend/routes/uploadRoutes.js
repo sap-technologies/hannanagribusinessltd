@@ -2,6 +2,7 @@ import express from 'express';
 import upload from '../middleware/fileUpload.js';
 import { uploadImageToSupabase, deleteImageFromSupabase } from '../config/supabase.js';
 import compressImage from '../middleware/imageCompression.js';
+import { managerOrAdmin } from '../middleware/auth.js';
 import sql from '../db.js';
 import sharp from 'sharp';
 
@@ -148,9 +149,9 @@ router.get('/goat-photo/:id', async (req, res) => {
 
 /**
  * DELETE /api/upload/goat-photo/:id
- * Delete photo for a specific goat
+ * Delete photo for a specific goat (Manager or Admin only)
  */
-router.delete('/goat-photo/:id', async (req, res) => {
+router.delete('/goat-photo/:id', managerOrAdmin, async (req, res) => {
   try {
     const goatId = req.params.id;
 
@@ -249,9 +250,9 @@ router.post('/profile-photo', upload.single('photo'), async (req, res) => {
 
 /**
  * DELETE /api/upload/profile-photo
- * Delete user's profile photo
+ * Delete user's profile photo (Manager or Admin only)
  */
-router.delete('/profile-photo', async (req, res) => {
+router.delete('/profile-photo', managerOrAdmin, async (req, res) => {
   try {
     // Get current profile photo
     const [user] = await sql`

@@ -1,5 +1,6 @@
 import express from 'express';
 import CoffeePresenter from '../presenters/CoffeePresenter.js';
+import { managerOrAdmin } from '../middleware/auth.js';
 
 const router = express.Router();
 
@@ -47,8 +48,8 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-// DELETE coffee farm
-router.delete('/:id', async (req, res) => {
+// DELETE coffee farm (Manager or Admin only)
+router.delete('/:id', managerOrAdmin, async (req, res) => {
   const result = await CoffeePresenter.deleteFarm(req.params.id);
   
   if (result.success) {

@@ -1,5 +1,6 @@
 import express from 'express';
 import GoatPresenter from '../presenters/GoatPresenter.js';
+import { managerOrAdmin } from '../middleware/auth.js';
 
 const router = express.Router();
 
@@ -113,8 +114,8 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-// DELETE goat
-router.delete('/:id', async (req, res) => {
+// DELETE goat (Manager or Admin only)
+router.delete('/:id', managerOrAdmin, async (req, res) => {
   const result = await GoatPresenter.deleteGoat(req.params.id);
   
   if (result.success) {

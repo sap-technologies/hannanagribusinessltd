@@ -1,6 +1,7 @@
 import HealthModel from '../models/HealthModel.js';
 import GoatModel from '../models/GoatModel.js';
 import notificationHelper from '../utils/notificationHelper.js';
+import reminderService from '../services/reminderService.js';
 
 // Presenter - Business logic layer for Health & Treatment operations
 class HealthPresenter {
@@ -64,6 +65,23 @@ class HealthPresenter {
       notificationHelper.notifyHealthCreated(newRecord, performedBy, performedByName).catch(err => 
         console.error('Failed to send notification:', err)
       );
+      
+      // Create manual reminder if requested
+      if (healthData.setReminder && healthData.reminderDate) {
+        try {
+          await reminderService.createManualReminder({
+            type: 'health_checkup',
+            referenceId: newRecord.health_id,
+            referenceTable: 'health_records',
+            reminderDate: healthData.reminderDate,
+            title: healthData.reminderTitle,
+            description: healthData.reminderDescription,
+            goatId: healthData.goat_id
+          });
+        } catch (reminderError) {
+          console.error('Failed to create reminder:', reminderError);
+        }
+      }
       
       return {
         success: true,

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './BreedingForm.css';
+import './ReminderField.css';
 
 const BreedingForm = ({ onSubmit, editingRecord, onCancel, goats = [] }) => {
   const [formData, setFormData] = useState({
@@ -13,7 +14,10 @@ const BreedingForm = ({ onSubmit, editingRecord, onCancel, goats = [] }) => {
     male_kids: '',
     female_kids: '',
     kidding_outcome: '',
-    remarks: ''
+    remarks: '',
+    setReminder: false,
+    reminderDate: '',
+    reminderDescription: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -30,7 +34,10 @@ const BreedingForm = ({ onSubmit, editingRecord, onCancel, goats = [] }) => {
         male_kids: editingRecord.male_kids || '',
         female_kids: editingRecord.female_kids || '',
         kidding_outcome: editingRecord.kidding_outcome || '',
-        remarks: editingRecord.remarks || ''
+        remarks: editingRecord.remarks || '',
+        setReminder: false,
+        reminderDate: '',
+        reminderDescription: ''
       });
     }
   }, [editingRecord]);
@@ -57,7 +64,10 @@ const BreedingForm = ({ onSubmit, editingRecord, onCancel, goats = [] }) => {
         male_kids: '',
         female_kids: '',
         kidding_outcome: '',
-        remarks: ''
+        remarks: '',
+        setReminder: false,
+        reminderDate: '',
+        reminderDescription: ''
       });
     }
     } finally {
@@ -66,10 +76,10 @@ const BreedingForm = ({ onSubmit, editingRecord, onCancel, goats = [] }) => {
   };
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
     setFormData(prev => ({
       ...prev,
-      [name]: value
+      [name]: type === 'checkbox' ? checked : value
     }));
   };
 
@@ -242,6 +252,60 @@ const BreedingForm = ({ onSubmit, editingRecord, onCancel, goats = [] }) => {
           rows="3"
           placeholder="Additional notes about the breeding/kidding"
         />
+      </div>
+
+      <div className="reminder-container">
+        <div className="reminder-header" onClick={() => setFormData(prev => ({ ...prev, setReminder: !prev.setReminder }))}>
+          <input
+            type="checkbox"
+            name="setReminder"
+            id="setReminder"
+            checked={formData.setReminder}
+            onChange={handleChange}
+            className="reminder-checkbox"
+          />
+          <label htmlFor="setReminder" className="reminder-label">
+            <span className="reminder-icon">🔔</span>
+            Set a reminder for expected kidding
+          </label>
+        </div>
+
+        {formData.setReminder && (
+          <>
+            <div className="reminder-info">
+              Get notified before the expected kidding date to prepare properly
+            </div>
+            <div className="reminder-fields" style={styles.row}>
+              <div className="reminder-field" style={styles.formGroup}>
+                <label>
+                  Reminder Date <span className="required">*</span>
+                </label>
+                <input
+                  type="date"
+                  name="reminderDate"
+                  value={formData.reminderDate}
+                  onChange={handleChange}
+                  style={styles.input}
+                  required={formData.setReminder}
+                />
+                <span className="reminder-helper">When should we remind you?</span>
+              </div>
+
+              <div className="reminder-field" style={styles.formGroup}>
+                <label>Reminder Note</label>
+                <input
+                  type="text"
+                  name="reminderDescription"
+                  value={formData.reminderDescription}
+                  onChange={handleChange}
+                  style={styles.input}
+                  placeholder="e.g., Check doe condition before kidding"
+                />
+                <span className="reminder-helper">Add context to your reminder</span>
+              </div>
+            </div>
+          </>
+        )}
       </div>
 
       <div style={styles.buttonGroup}>

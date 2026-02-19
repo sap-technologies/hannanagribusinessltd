@@ -1,5 +1,6 @@
 import express from 'express';
 import MatookePresenter from '../presenters/MatookePresenter.js';
+import { managerOrAdmin } from '../middleware/auth.js';
 
 const router = express.Router();
 
@@ -47,8 +48,8 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-// DELETE matooke farm
-router.delete('/:id', async (req, res) => {
+// DELETE matooke farm (Manager or Admin only)
+router.delete('/:id', managerOrAdmin, async (req, res) => {
   const result = await MatookePresenter.deleteFarm(req.params.id);
   
   if (result.success) {

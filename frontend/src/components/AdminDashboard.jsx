@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import api from '../services/authService';
 import BackButton from './BackButton';
+import NotificationCreator from './NotificationCreator';
 import './AdminDashboard.css';
 
 function AdminDashboard({ onBack }) {
@@ -33,6 +34,8 @@ function AdminDashboard({ onBack }) {
   const [refreshing, setRefreshing] = useState(false);
   const [lastRefresh, setLastRefresh] = useState(new Date());
   const [showAddUser, setShowAddUser] = useState(false);
+  const [showNotificationCreator, setShowNotificationCreator] = useState(false);
+  const [message, setMessage] = useState({ text: '', type: '' });
   const [activeTab, setActiveTab] = useState(() => {
     const saved = localStorage.getItem('adminActiveTab');
     return saved || 'overview';
@@ -401,6 +404,43 @@ function AdminDashboard({ onBack }) {
               </div>
             </div>
           </div>
+
+          {/* Quick Actions */}
+          <div className="stats-section">
+            <h2>⚡ Quick Actions</h2>
+            <div className="quick-actions-grid">
+              <button 
+                className="quick-action-btn notification-btn"
+                onClick={() => setShowNotificationCreator(true)}
+              >
+                <span className="action-icon">📢</span>
+                <div className="action-content">
+                  <h4>Create Notification</h4>
+                  <p>Send notifications to users</p>
+                </div>
+              </button>
+              <button 
+                className="quick-action-btn user-btn"
+                onClick={() => setActiveTab('users')}
+              >
+                <span className="action-icon">👤</span>
+                <div className="action-content">
+                  <h4>Manage Users</h4>
+                  <p>Add or edit user accounts</p>
+                </div>
+              </button>
+              <button 
+                className="quick-action-btn activity-btn"
+                onClick={() => setActiveTab('activity')}
+              >
+                <span className="action-icon">📊</span>
+                <div className="action-content">
+                  <h4>View Activity</h4>
+                  <p>Check recent system activity</p>
+                </div>
+              </button>
+            </div>
+          </div>
         </>
       )}
 
@@ -660,6 +700,24 @@ function AdminDashboard({ onBack }) {
             </tbody>
           </table>
         </div>
+        </div>
+      )}
+
+      {/* Notification Creator Modal */}
+      {showNotificationCreator && (
+        <NotificationCreator
+          onClose={() => setShowNotificationCreator(false)}
+          onSuccess={(msg) => {
+            setMessage({ text: msg, type: 'success' });
+            setTimeout(() => setMessage({ text: '', type: '' }), 5000);
+          }}
+        />
+      )}
+
+      {/* Success/Error Message */}
+      {message.text && (
+        <div className={`admin-message ${message.type}`}>
+          {message.type === 'success' ? '✅' : '⚠️'} {message.text}
         </div>
       )}
     </div>

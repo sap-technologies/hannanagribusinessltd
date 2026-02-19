@@ -1,5 +1,6 @@
 import express from 'express';
 import HealthPresenter from '../presenters/HealthPresenter.js';
+import { managerOrAdmin } from '../middleware/auth.js';
 
 const router = express.Router();
 
@@ -77,8 +78,8 @@ router.put('/:id', async (req, res) => {
   res.json(result);
 });
 
-// Delete health record
-router.delete('/:id', async (req, res) => {
+// Delete health record (Manager or Admin only)
+router.delete('/:id', managerOrAdmin, async (req, res) => {
   const result = await HealthPresenter.deleteRecord(req.params.id);
   res.json(result);
 });

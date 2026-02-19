@@ -1,5 +1,6 @@
 import express from 'express';
 import ExpensesPresenter from '../presenters/ExpensesPresenter.js';
+import { managerOrAdmin } from '../middleware/auth.js';
 
 const router = express.Router();
 
@@ -125,8 +126,8 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-// Delete expense record
-router.delete('/:id', async (req, res) => {
+// Delete expense record (Manager or Admin only)
+router.delete('/:id', managerOrAdmin, async (req, res) => {
   const result = await ExpensesPresenter.deleteRecord(req.params.id);
   if (result.success) {
     res.json({ message: 'Expense record deleted successfully', data: result.data });

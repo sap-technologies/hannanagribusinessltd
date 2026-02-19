@@ -1,5 +1,6 @@
 import express from 'express';
 import VaccinationPresenter from '../presenters/VaccinationPresenter.js';
+import { managerOrAdmin } from '../middleware/auth.js';
 
 const router = express.Router();
 
@@ -112,8 +113,8 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-// Delete vaccination record
-router.delete('/:id', async (req, res) => {
+// Delete vaccination record (Manager or Admin only)
+router.delete('/:id', managerOrAdmin, async (req, res) => {
   const result = await VaccinationPresenter.deleteRecord(req.params.id);
   if (result.success) {
     res.json({ message: result.message });

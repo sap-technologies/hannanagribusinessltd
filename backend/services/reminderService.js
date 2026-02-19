@@ -18,6 +18,53 @@ class ReminderService {
   }
 
   /**
+   * Create a manual reminder from user input
+   * This is called when users set custom reminder dates on forms
+   */
+  async createManualReminder(data) {
+    const { 
+      type, 
+      referenceId, 
+      referenceTable, 
+      reminderDate, 
+      title, 
+      description,
+      goatId 
+    } = data;
+    
+    // Validate required fields
+    if (!type || !referenceId || !referenceTable || !reminderDate) {
+      throw new Error('Missing required reminder fields');
+    }
+
+    // Check if reminder already exists for this record
+    const [existing] = await sql`
+      SELECT * FROM reminders
+      WHERE type = ${type}
+      AND reference_id = ${referenceId}
+      AND is_completed = false
+    `;
+    
+    if (existing) {
+      console.log(`Reminder already exists for ${type} #${referenceId}`);
+      return existing;
+    }
+
+    // Create the reminder
+    const reminder = await this.createReminder({
+      type,
+      referenceId,
+      referenceTable,
+      reminderDate,
+      title: title || `Reminder for ${type} - ${goatId || `ID ${referenceId}`}`,
+      description: description || `Custom reminder set by user`
+    });
+
+    console.log(`✅ Manual reminder created: ${reminder.title} on ${reminderDate}`);
+    return reminder;
+  }
+
+  /**
    * Get all active reminders
    */
   async getActiveReminders() {
@@ -65,8 +112,8 @@ class ReminderService {
       SELECT v.*, g.goat_id
       FROM vaccination_records v
       JOIN goats g ON v.goat_id = g.goat_id
-      WHERE v.next_vaccination_date IS NOT NULL
-      AND v.next_vaccination_date BETWEEN CURRENT_DATE AND CURRENT_DATE + INTERVAL '7 days'
+      WHERE v.next_due_date IS NOT NULL
+      AND v.next_due_date BETWEEN CURRENT_DATE AND CURRENT_DATE + INTERVAL '7 days'
       AND g.status = 'Active'
     `;
     
@@ -85,9 +132,9 @@ class ReminderService {
           type: 'vaccination',
           referenceId: vac.vaccination_id,
           referenceTable: 'vaccination_records',
-          reminderDate: vac.next_vaccination_date,
-          title: `Vaccination due for ${vac.goat_id}`,
-          description: `Next ${vac.vaccine_type} vaccination due`
+          reminderDate: vac.next_due_date,
+          title: `${vac.type} due for goat ${vac.goat_id}`,
+          description: `Next ${vac.drug_used} ${vac.type.toLowerCase()} due`
         });
         reminders.push(reminder);
       }
@@ -102,10 +149,11 @@ class ReminderService {
   async checkBreedingReminders() {
     // Get breeding records where kidding is expected within 30 days (pregnancy ~150 days)
     const upcomingBirths = await sql`
-      SELECT b.*, g.goat_id
+      SELECT b.*, b.doe_id as goat_id
       FROM breeding_records b
       JOIN goats g ON b.doe_id = g.goat_id
       WHERE b.actual_kidding_date IS NULL
+      AND b.expected_kidding_date IS NOT NULL
       AND b.expected_kidding_date BETWEEN CURRENT_DATE AND CURRENT_DATE + INTERVAL '30 days'
       AND g.status = 'Active'
     `;
@@ -126,8 +174,8 @@ class ReminderService {
           referenceId: breeding.breeding_id,
           referenceTable: 'breeding_records',
           reminderDate: breeding.expected_kidding_date,
-          title: `Kidding expected for ${breeding.goat_id}`,
-          description: `Pregnancy check and preparation needed`
+          title: `Kidding expected for doe ${breeding.doe_id}`,
+          description: `Pregnancy check and preparation needed for expected kidding`
         });
         reminders.push(reminder);
       }
@@ -140,19 +188,19 @@ class ReminderService {
    * Check for health issues and create alerts
    */
   async checkHealthAlerts() {
-    // Get recent health records with ongoing treatments
+    // Get recent health records with ongoing treatments or monitoring
     const ongoingTreatments = await sql`
       SELECT h.*, g.goat_id
       FROM health_records h
       JOIN goats g ON h.goat_id = g.goat_id
-      WHERE h.recovery_status IN ('ongoing', 'monitoring')
-      AND h.treatment_date >= CURRENT_DATE - INTERVAL '30 days'
+      WHERE h.recovery_status IN ('In Progress', 'Under Treatment', 'Monitoring')
+      AND h.record_date >= CURRENT_DATE - INTERVAL '30 days'
       AND g.status = 'Active'
     `;
     
     const alerts = [];
     for (const health of ongoingTreatments) {
-      const daysSinceTreatment = Math.floor((new Date() - new Date(health.treatment_date)) / (1000 * 60 * 60 * 24));
+      const daysSinceTreatment = Math.floor((new Date() - new Date(health.record_date)) / (1000 * 60 * 60 * 24));
       
       // Send reminder for follow-up every 7 days
       if (daysSinceTreatment > 0 && daysSinceTreatment % 7 === 0) {
@@ -169,8 +217,8 @@ class ReminderService {
             referenceId: health.health_id,
             referenceTable: 'health_records',
             reminderDate: new Date().toISOString().split('T')[0],
-            title: `Health follow-up for ${health.goat_id}`,
-            description: `Check recovery status for ${health.illness_type}`
+            title: `Health follow-up for goat ${health.goat_id}`,
+            description: `Check recovery status: ${health.problem_observed.substring(0, 100)}...`
           });
           alerts.push(reminder);
         }

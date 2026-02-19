@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './VaccinationForm.css';
+import './ReminderField.css';
 
 const VaccinationForm = ({ onSubmit, editingRecord, onCancel, goats = [] }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -9,7 +10,10 @@ const VaccinationForm = ({ onSubmit, editingRecord, onCancel, goats = [] }) => {
     type: '',
     drug_used: '',
     dosage: '',
-    next_due_date: ''
+    next_due_date: '',
+    setReminder: false,
+    reminderDate: '',
+    reminderDescription: ''
   });
 
   useEffect(() => {
@@ -20,7 +24,10 @@ const VaccinationForm = ({ onSubmit, editingRecord, onCancel, goats = [] }) => {
         type: editingRecord.type || '',
         drug_used: editingRecord.drug_used || '',
         dosage: editingRecord.dosage || '',
-        next_due_date: editingRecord.next_due_date ? editingRecord.next_due_date.split('T')[0] : ''
+        next_due_date: editingRecord.next_due_date ? editingRecord.next_due_date.split('T')[0] : '',
+        setReminder: false,
+        reminderDate: '',
+        reminderDescription: ''
       });
     } else {
       setFormData({
@@ -29,16 +36,19 @@ const VaccinationForm = ({ onSubmit, editingRecord, onCancel, goats = [] }) => {
         type: '',
         drug_used: '',
         dosage: '',
-        next_due_date: ''
+        next_due_date: '',
+        setReminder: false,
+        reminderDate: '',
+        reminderDescription: ''
       });
     }
   }, [editingRecord]);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
     setFormData(prev => ({
       ...prev,
-      [name]: value
+      [name]: type === 'checkbox' ? checked : value
     }));
   };
 
@@ -159,6 +169,58 @@ const VaccinationForm = ({ onSubmit, editingRecord, onCancel, goats = [] }) => {
               onChange={handleChange}
             />
           </div>
+        </div>
+
+        <div className="reminder-container">
+          <div className="reminder-header" onClick={() => setFormData(prev => ({ ...prev, setReminder: !prev.setReminder }))}>
+            <input
+              type="checkbox"
+              name="setReminder"
+              id="setReminder"
+              checked={formData.setReminder}
+              onChange={handleChange}
+              className="reminder-checkbox"
+            />
+            <label htmlFor="setReminder" className="reminder-label">
+              <span className="reminder-icon">🔔</span>
+              Set a reminder for this vaccination
+            </label>
+          </div>
+
+          {formData.setReminder && (
+            <>
+              <div className="reminder-info">
+                Get notified on a specific date to follow up on this vaccination
+              </div>
+              <div className="reminder-fields">
+                <div className="reminder-field">
+                  <label>
+                    Reminder Date <span className="required">*</span>
+                  </label>
+                  <input
+                    type="date"
+                    name="reminderDate"
+                    value={formData.reminderDate}
+                    onChange={handleChange}
+                    required={formData.setReminder}
+                  />
+                  <span className="reminder-helper">When should we remind you?</span>
+                </div>
+
+                <div className="reminder-field">
+                  <label>Reminder Note</label>
+                  <input
+                    type="text"
+                    name="reminderDescription"
+                    value={formData.reminderDescription}
+                    onChange={handleChange}
+                    placeholder="e.g., Check vaccination effectiveness"
+                  />
+                  <span className="reminder-helper">Add context to your reminder</span>
+                </div>
+              </div>
+            </>
+          )}
         </div>
 
         <div className="form-actions">

@@ -1,6 +1,7 @@
 import express from 'express';
 import MonthlySummaryPresenter from '../presenters/MonthlySummaryPresenter.js';
 import monthlySummaryService from '../services/monthlySummaryService.js';
+import { managerOrAdmin } from '../middleware/auth.js';
 
 const router = express.Router();
 
@@ -227,8 +228,8 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-// Delete monthly summary record
-router.delete('/:id', async (req, res) => {
+// Delete monthly summary record (Manager or Admin only)
+router.delete('/:id', managerOrAdmin, async (req, res) => {
   const result = await MonthlySummaryPresenter.deleteRecord(req.params.id);
   if (result.success) {
     res.json({ message: 'Monthly summary record deleted successfully', data: result.data });

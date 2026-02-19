@@ -1,6 +1,6 @@
 import express from 'express';
 import NotificationController from '../controllers/notificationController.js';
-import { verifyToken, adminOnly } from '../middleware/auth.js';
+import { verifyToken, adminOnly, managerOrAdmin } from '../middleware/auth.js';
 
 const router = express.Router();
 
@@ -19,11 +19,11 @@ router.put('/:id/read', NotificationController.markAsRead);
 // Mark all as read
 router.put('/mark-all-read', NotificationController.markAllAsRead);
 
-// Delete all notifications
-router.delete('/delete-all', NotificationController.deleteAllNotifications);
+// Delete all notifications (Manager or Admin only)
+router.delete('/delete-all', managerOrAdmin, NotificationController.deleteAllNotifications);
 
-// Delete notification
-router.delete('/:id', NotificationController.deleteNotification);
+// Delete notification (Manager or Admin only)
+router.delete('/:id', managerOrAdmin, NotificationController.deleteNotification);
 
 // Create notification (admin only)
 router.post('/', adminOnly, NotificationController.createNotification);

@@ -377,6 +377,122 @@ With these features implemented:
 **Previous:** 70% production ready
 **Current:** 85-90% production ready ✅
 
+---
+
+## 7. 🔔 MANUAL REMINDERS
+
+### Backend Implementation
+
+#### Reminder Service Enhancement
+**Location:** `backend/services/reminderService.js`
+
+New Method:
+- `createManualReminder(data)` - Create custom reminder when users create records
+
+Features:
+- Field validation (type, referenceId, referenceTable, reminderDate required)
+- Duplicate prevention (checks for existing reminders)
+- Auto-generation of title and description if not provided
+- Error handling (failures don't block record creation)
+
+#### Presenter Integration
+**Locations:** 
+- `backend/presenters/VaccinationPresenter.js`
+- `backend/presenters/BreedingPresenter.js`
+- `backend/presenters/HealthPresenter.js`
+
+Integration:
+```javascript
+// After creating the record:
+if (data.setReminder && data.reminderDate) {
+  await reminderService.createManualReminder({
+    type: 'vaccination',              // or 'breeding', 'health_checkup'
+    referenceId: record.vaccination_id,
+    referenceTable: 'vaccination_records',
+    reminderDate: data.reminderDate,
+    title: data.reminderTitle,
+    description: data.reminderDescription,
+    goatId: data.goat_id
+  });
+}
+```
+
+### Frontend Implementation
+
+#### Updated Forms
+**Locations:**
+- `frontend/src/components/VaccinationForm.jsx`
+- `frontend/src/components/BreedingForm.jsx`
+- `frontend/src/components/HealthForm.jsx`
+
+New Fields Added:
+```javascript
+{
+  setReminder: false,           // Checkbox - enable reminder
+  reminderDate: '',            // Date picker - when to remind
+  reminderDescription: ''      // Text input - optional note
+}
+```
+
+Features:
+- **Checkbox toggle** - Enable/disable reminder section
+- **Conditional rendering** - Fields only show when checkbox is checked
+- **Date validation** - Reminder date required when enabled
+- **Professional styling** - Light gray container with border
+- **Context-specific labels**:
+  - Vaccination: "Set a reminder for this vaccination"
+  - Breeding: "Set a reminder for expected kidding"
+  - Health: "Set a follow-up reminder"
+
+### User Experience
+
+#### Visual Design:
+- 🔔 Bell emoji for visual recognition
+- Light background (`#f8f9fa`) to separate from main form
+- Rounded corners and subtle border
+- Smooth conditional display (no jarring transitions)
+
+#### Form Flow:
+1. User fills out main record details
+2. (Optional) Check "Set a reminder" at bottom
+3. Select reminder date
+4. Add optional reminder note
+5. Submit form - both record and reminder created together
+
+### Use Cases:
+
+**Vaccination Follow-ups:**
+- Remind to check vaccination effectiveness after 2 weeks
+- Schedule booster shot reminder
+- Follow-up for adverse reaction monitoring
+
+**Breeding Preparation:**
+- Ultrasound appointment before kidding
+- Prepare birthing supplies reminder
+- Nutritional supplement schedule
+
+**Health Monitoring:**
+- Re-examine wound after treatment
+- Check recovery progress
+- Schedule vet follow-up visit
+
+### Benefits:
+
+✅ **Convenience** - Set reminders without leaving the form  
+✅ **Flexibility** - Choose any future date  
+✅ **Context preservation** - Add notes while details are fresh  
+✅ **Zero friction** - Optional feature, doesn't interrupt workflow  
+✅ **Smart integration** - Works alongside auto-reminders  
+
+### Database:
+Reminders stored in `reminders` table with:
+- Link to original record (reference_id + reference_table)
+- Custom date selected by user
+- Optional custom title/description
+- Completion tracking (is_completed)
+
+---
+
 ### Remaining Tasks
 1. ⚠️ Security: Address npm vulnerabilities (run `npm audit fix`)
 2. ⚠️ Testing: Add unit and integration tests
@@ -395,8 +511,9 @@ With these features implemented:
 | PDF Reports | ✅ | ✅ | Complete |
 | Excel Export | ✅ | ✅ | Complete |
 | Email Notifications | ✅ | - | Backend Only |
-| Vaccination Reminders | ✅ | - | Backend Only |
-| Breeding Alerts | ✅ | - | Backend Only |
+| Vaccination Reminders (Auto) | ✅ | - | Backend Only |
+| Breeding Alerts (Auto) | ✅ | - | Backend Only |
+| **Manual Reminders** | ✅ | ✅ | **✨ New Feature** |
 | Advanced Search | ✅ | ✅ | Complete |
 | Multi-Filter | ✅ | ✅ | Complete |
 | Sorting | ✅ | ✅ | Complete |
@@ -414,6 +531,6 @@ For questions or issues:
 
 ---
 
-**Implementation Date:** February 2025  
-**Version:** 2.1.0  
-**Status:** ✅ All Features Complete
+**Implementation Date:** February 2026  
+**Version:** 2.2.0  
+**Status:** ✅ All Features Complete (Including Manual Reminders)

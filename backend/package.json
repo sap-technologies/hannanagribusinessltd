@@ -8,7 +8,10 @@
     "dev": "nodemon server.js",
     "start": "node server.js",
     "db:setup": "node database/setup.js",
-    "db:migrate": "node database/migrate-to-base64.js"
+    "db:migrate": "node database/migrate-to-base64.js",
+    "db:auth": "node database/create-auth-tables.js",
+    "db:notifications": "node database/create-notifications.js",
+    "db:fix-notifications": "node database/update-notification-types.js"
   },
   "keywords": [
     "agribusiness",

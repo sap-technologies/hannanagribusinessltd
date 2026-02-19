@@ -1,5 +1,6 @@
 import express from 'express';
 import KidGrowthPresenter from '../presenters/KidGrowthPresenter.js';
+import { managerOrAdmin } from '../middleware/auth.js';
 
 const router = express.Router();
 
@@ -67,8 +68,8 @@ router.put('/:id', async (req, res) => {
   res.json(result);
 });
 
-// Delete growth record
-router.delete('/:id', async (req, res) => {
+// Delete growth record (Manager or Admin only)
+router.delete('/:id', managerOrAdmin, async (req, res) => {
   const result = await KidGrowthPresenter.deleteRecord(req.params.id);
   res.json(result);
 });

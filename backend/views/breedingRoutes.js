@@ -1,5 +1,6 @@
 import express from 'express';
 import BreedingPresenter from '../presenters/BreedingPresenter.js';
+import { managerOrAdmin } from '../middleware/auth.js';
 
 const router = express.Router();
 
@@ -67,8 +68,8 @@ router.put('/:id', async (req, res) => {
   res.json(result);
 });
 
-// Delete breeding record
-router.delete('/:id', async (req, res) => {
+// Delete breeding record (Manager or Admin only)
+router.delete('/:id', managerOrAdmin, async (req, res) => {
   const result = await BreedingPresenter.deleteRecord(req.params.id);
   res.json(result);
 });

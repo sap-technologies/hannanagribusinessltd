@@ -1,6 +1,7 @@
 import VaccinationModel from '../models/VaccinationModel.js';
 import GoatModel from '../models/GoatModel.js';
 import notificationHelper from '../utils/notificationHelper.js';
+import reminderService from '../services/reminderService.js';
 
 class VaccinationPresenter {
   // Validate vaccination data
@@ -122,6 +123,23 @@ class VaccinationPresenter {
       notificationHelper.notifyVaccinationCreated(record, performedBy, performedByName).catch(err => 
         console.error('Failed to send notification:', err)
       );
+      
+      // Create manual reminder if requested
+      if (recordData.setReminder && recordData.reminderDate) {
+        try {
+          await reminderService.createManualReminder({
+            type: 'vaccination',
+            referenceId: record.vaccination_id,
+            referenceTable: 'vaccination_records',
+            reminderDate: recordData.reminderDate,
+            title: recordData.reminderTitle,
+            description: recordData.reminderDescription,
+            goatId: recordData.goat_id
+          });
+        } catch (reminderError) {
+          console.error('Failed to create reminder:', reminderError);
+        }
+      }
       
       return { success: true, data: record, message: 'Vaccination record created successfully' };
     } catch (error) {
