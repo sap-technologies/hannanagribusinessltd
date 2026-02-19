@@ -354,32 +354,50 @@ function App({ user, onProfileUpdate, showProfile, onProfileNavigate }) {
     return presenter;
   });
 
-  // Load data when breeding-farm is active
+  // Load goats when entering breeding farm (needed for all tabs)
   useEffect(() => {
     if (currentProject === 'breeding-farm') {
+      goatPresenter.loadGoats();
+    }
+  }, [currentProject, goatPresenter]);
+
+  // Load tab-specific data when breeding-farm tab changes
+  useEffect(() => {
+    console.log('🔍 Tab changed to:', breedingFarmTab, 'in project:', currentProject);
+    if (currentProject === 'breeding-farm') {
       if (breedingFarmTab === 'goats') {
+        console.log('✅ Loading goats data');
         goatPresenter.loadGoats();
       } else if (breedingFarmTab === 'breeding') {
+        console.log('✅ Loading breeding data');
         breedingPresenterInstance.loadAllRecords();
       } else if (breedingFarmTab === 'kid-growth') {
+        console.log('✅ Loading kid-growth data');
         kidGrowthPresenterInstance.loadAllRecords();
       } else if (breedingFarmTab === 'health') {
+        console.log('✅ Loading health data');
         healthPresenterInstance.loadAllRecords();
       } else if (breedingFarmTab === 'vaccination') {
+        console.log('✅ Loading vaccination data');
         vaccinationPresenterInstance.loadAllRecords();
       } else if (breedingFarmTab === 'feeding') {
+        console.log('✅ Loading feeding data');
         feedingPresenterInstance.loadAllRecords();
       } else if (breedingFarmTab === 'sales-breeding') {
+        console.log('✅ Loading sales-breeding data');
         salesBreedingPresenterInstance.loadAllRecords();
       } else if (breedingFarmTab === 'sales-meat') {
+        console.log('✅ Loading sales-meat data');
         salesMeatPresenterInstance.loadAllRecords();
       } else if (breedingFarmTab === 'expenses') {
+        console.log('✅ Loading expenses data');
         expensesPresenterInstance.loadAllRecords();
       } else if (breedingFarmTab === 'monthly-summary') {
+        console.log('✅ Loading monthly-summary data');
         monthlySummaryPresenterInstance.loadAllRecords();
       }
     }
-  }, [currentProject, breedingFarmTab, goatPresenter, breedingPresenterInstance, kidGrowthPresenterInstance, healthPresenterInstance, vaccinationPresenterInstance, feedingPresenterInstance, salesBreedingPresenterInstance, salesMeatPresenterInstance, expensesPresenterInstance, monthlySummaryPresenterInstance]);
+  }, [breedingFarmTab, currentProject, goatPresenter, breedingPresenterInstance, kidGrowthPresenterInstance, healthPresenterInstance, vaccinationPresenterInstance, feedingPresenterInstance, salesBreedingPresenterInstance, salesMeatPresenterInstance, expensesPresenterInstance, monthlySummaryPresenterInstance]);
 
   // Reset all UI states when switching tabs - ensures users see default list view
   useEffect(() => {
@@ -778,7 +796,9 @@ function App({ user, onProfileUpdate, showProfile, onProfileNavigate }) {
                 </div>
 
             {/* Goats Tab Content */}
-            {breedingFarmTab === 'goats' && (
+            {breedingFarmTab === 'goats' && (() => {
+              console.log('🐐 Rendering Goats tab');
+              return (
               <>
                 {/* Statistics Cards */}
                 <div className="stats-cards">
@@ -840,10 +860,13 @@ function App({ user, onProfileUpdate, showProfile, onProfileNavigate }) {
                   />
                 )}
               </>
-            )}
+            );
+            })()}
 
             {/* Breeding & Kidding Tab Content */}
-            {breedingFarmTab === 'breeding' && (
+            {breedingFarmTab === 'breeding' && (() => {
+              console.log('🍼 Rendering Breeding tab');
+              return (
               <>
                 {/* Statistics Cards */}
                 <div className="stats-cards">
@@ -905,10 +928,13 @@ function App({ user, onProfileUpdate, showProfile, onProfileNavigate }) {
                   />
                 )}
               </>
-            )}
+            );
+            })()}
 
             {/* Kid Growth & Weaning Tab Content */}
-            {breedingFarmTab === 'kid-growth' && (
+            {breedingFarmTab === 'kid-growth' && (() => {
+              console.log('📈 Rendering Kid Growth tab');
+              return (
               <>
                 {/* Statistics Cards */}
                 <div className="stats-cards">
@@ -969,10 +995,13 @@ function App({ user, onProfileUpdate, showProfile, onProfileNavigate }) {
                   />
                 )}
               </>
-            )}
+            );
+            })()}
 
             {/* Health & Treatment Tab Content */}
-            {breedingFarmTab === 'health' && (
+            {breedingFarmTab === 'health' && (() => {
+              console.log('🏥 Rendering Health tab');
+              return (
               <>
                 {/* Statistics Cards */}
                 <div className="stats-cards">
@@ -1034,10 +1063,13 @@ function App({ user, onProfileUpdate, showProfile, onProfileNavigate }) {
                   />
                 )}
               </>
-            )}
+            );
+            })()}
 
             {/* Vaccination & Deworming Tab Content */}
-            {breedingFarmTab === 'vaccination' && (
+            {breedingFarmTab === 'vaccination' && (() => {
+              console.log('💉 Rendering Vaccination tab');
+              return (
               <>
                 {/* Statistics Cards */}
                 <div className="stats-cards">
@@ -1103,10 +1135,13 @@ function App({ user, onProfileUpdate, showProfile, onProfileNavigate }) {
                   />
                 )}
               </>
-            )}
+            );
+            })()}
 
             {/* Feeding & Fattening Tab Content */}
-            {breedingFarmTab === 'feeding' && (
+            {breedingFarmTab === 'feeding' && (() => {
+              console.log('🌾 Rendering Feeding tab');
+              return (
               <>
                 {/* Statistics Cards */}
                 <div className="stats-cards">
@@ -1168,10 +1203,13 @@ function App({ user, onProfileUpdate, showProfile, onProfileNavigate }) {
                   />
                 )}
               </>
-            )}
+            );
+            })()}
 
             {/* Sales - Breeding Tab Content */}
-            {breedingFarmTab === 'sales-breeding' && (
+            {breedingFarmTab === 'sales-breeding' && (() => {
+              console.log('💰 Rendering Sales-Breeding tab');
+              return (
               <>
                 {/* Statistics Cards */}
                 <div className="stats-cards">
@@ -1233,10 +1271,13 @@ function App({ user, onProfileUpdate, showProfile, onProfileNavigate }) {
                   />
                 )}
               </>
-            )}
+            );
+            })()}
 
             {/* Sales - Meat Tab Content */}
-            {breedingFarmTab === 'sales-meat' && (
+            {breedingFarmTab === 'sales-meat' && (() => {
+              console.log('🥩 Rendering Sales-Meat tab');
+              return (
               <>
                 {/* Statistics Cards */}
                 <div className="stats-cards">
@@ -1298,10 +1339,13 @@ function App({ user, onProfileUpdate, showProfile, onProfileNavigate }) {
                   />
                 )}
               </>
-            )}
+            );
+            })()}
 
             {/* Expenses Tab Content */}
-            {breedingFarmTab === 'expenses' && (
+            {breedingFarmTab === 'expenses' && (() => {
+              console.log('💸 Rendering Expenses tab');
+              return (
               <>
                 {/* Statistics Cards */}
                 <div className="stats-cards">
@@ -1362,10 +1406,13 @@ function App({ user, onProfileUpdate, showProfile, onProfileNavigate }) {
                   />
                 )}
               </>
-            )}
+            );
+            })()}
 
             {/* Monthly Summary Tab Content */}
-            {breedingFarmTab === 'monthly-summary' && (
+            {breedingFarmTab === 'monthly-summary' && (() => {
+              console.log('📊 Rendering Monthly Summary tab');
+              return (
               <>
                 {/* Statistics Cards */}
                 <div className="stats-cards">
@@ -1428,7 +1475,8 @@ function App({ user, onProfileUpdate, showProfile, onProfileNavigate }) {
                   />
                 )}
               </>
-            )}
+            );
+            })()}
               </div>
             </div>
           </>
