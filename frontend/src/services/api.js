@@ -72,7 +72,7 @@ export const goatService = {
 
   updateGoat: async (id, goatData) => {
     try {
-      const response = await axios.put(`${API_URL}/breeding-farm/goats/${id}`, goatData);
+      const response = await apiClient.put(`/breeding-farm/goats/${id}`, goatData);
       return response.data;
     } catch (error) {
       console.error('API Error updating goat:', {
