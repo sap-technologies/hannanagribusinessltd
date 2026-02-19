@@ -30,6 +30,7 @@ import uploadRoutes from './routes/uploadRoutes.js';
 import searchRoutes from './routes/searchRoutes.js';
 import { verifyToken } from './middleware/auth.js';
 import notificationService from './services/notificationService.js';
+import keepAliveService from './services/keepAliveService.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -200,6 +201,9 @@ app.listen(PORT, () => {
   console.log('  ✓ CORS Protection');
   console.log('  ✓ Security Headers (Helmet)');
   console.log('========================================\n');
+  
+  // Start keep-alive service to prevent Render free tier from sleeping
+  keepAliveService.start();
 });
 
 export default app;
