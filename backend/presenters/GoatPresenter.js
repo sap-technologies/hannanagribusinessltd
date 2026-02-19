@@ -151,10 +151,13 @@ class GoatPresenter {
         };
       }
 
+      // Track changes for detailed notification
+      const changes = this.detectChanges(existingGoat, goatData);
+
       const updatedGoat = await GoatModel.updateGoat(goatId, goatData);
       
-      // Send notification to admins
-      notificationHelper.notifyGoatUpdated(updatedGoat, performedBy, performedByName).catch(err => 
+      // Send notification to admins with details of what changed
+      notificationHelper.notifyGoatUpdated(updatedGoat, changes, performedBy, performedByName).catch(err => 
         console.error('Failed to send notification:', err)
       );
       
@@ -309,6 +312,45 @@ class GoatPresenter {
     if (errorMessage.includes('Date of birth')) return 'date_of_birth';
     if (errorMessage.includes('Weight')) return 'weight';
     return null;
+  }
+
+  // Helper to detect what changed in goat data
+  detectChanges(oldData, newData) {
+    const changes = [];
+    const fieldsToCheck = {
+      breed: 'Breed',
+      sex: 'Sex',
+      date_of_birth: 'Date of Birth',
+      production_type: 'Production Type',
+      status: 'Status',
+      weight: 'Weight',
+      source: 'Source',
+      mother_id: 'Mother ID',
+      father_id: 'Father ID',
+      remarks: 'Remarks',
+      photo_url: 'Photo'
+    };
+
+    for (const [field, label] of Object.entries(fieldsToCheck)) {
+      if (newData[field] !== undefined && newData[field] !== oldData[field]) {
+        const oldValue = oldData[field] || '(empty)';
+        const newValue = newData[field] || '(empty)';
+        
+        // Special handling for date fields
+        if (field === 'date_of_birth') {
+          changes.push(`${label}: ${new Date(oldValue).toLocaleDateString()} → ${new Date(newValue).toLocaleDateString()}`);
+        } 
+        // Special handling for photo
+        else if (field === 'photo_url') {
+          changes.push(`${label} updated`);
+        }
+        else {
+          changes.push(`${label}: ${oldValue} → ${newValue}`);
+        }
+      }
+    }
+
+    return changes;
   }
 }
 

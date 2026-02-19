@@ -90,10 +90,10 @@ class GoatPresenter {
         if (photoFile) {
           try {
             await uploadService.uploadGoatPhoto(id, photoFile);
-            this.view.showSuccess(result.message + ' (with photo)');
+            this.view.showSuccess(result.message + ' ✅ Photo uploaded successfully');
           } catch (uploadError) {
             console.error('Photo upload failed:', uploadError);
-            this.view.showSuccess(result.message + ' (photo upload failed)');
+            this.view.showError('Goat updated but photo upload failed: ' + (uploadError.response?.data?.error || uploadError.message));
           }
         } else {
           this.view.showSuccess(result.message);

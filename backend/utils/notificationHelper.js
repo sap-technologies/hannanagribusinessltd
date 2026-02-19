@@ -73,11 +73,17 @@ class NotificationHelper {
   /**
    * Notification for goat update
    */
-  async notifyGoatUpdated(goat, performedBy = null, performedByName = null) {
+  async notifyGoatUpdated(goat, changes = [], performedBy = null, performedByName = null) {
+    // Build detailed message showing what changed
+    let message = `Goat "${goat.goat_id}" information has been updated`;
+    if (changes && changes.length > 0) {
+      message += `\n\nChanges made:\n• ${changes.join('\n• ')}`;
+    }
+
     return await this.notifyAdmins({
       type: 'goat',
       title: '✏️ Goat Record Updated',
-      message: `Goat "${goat.goat_id}" information has been updated`,
+      message,
       link: `/goats/${goat.goat_id}`,
       priority: 'low',
       performedBy,
