@@ -16,11 +16,17 @@ router.post('/goat-photo/:id', upload.single('photo'), async (req, res) => {
   try {
     const goatId = req.params.id;
     
+    console.log(`📸 Uploading photo for goat: ${goatId}`);
+    
     if (!req.file) {
+      console.error('No file in request');
       return res.status(400).json({ error: 'No image uploaded' });
     }
 
+    console.log(`File received: ${req.file.originalname}, size: ${req.file.size} bytes`);
+
     // Compress image using sharp
+    console.log('Compressing image...');
     const compressedBuffer = await sharp(req.file.buffer)
       .resize(800, 800, {
         fit: 'inside',
@@ -29,11 +35,15 @@ router.post('/goat-photo/:id', upload.single('photo'), async (req, res) => {
       .jpeg({ quality: 80 })
       .toBuffer();
 
+    console.log(`Compressed size: ${compressedBuffer.length} bytes`);
+
     // Generate unique filename
     const fileName = `goats/${goatId}-${Date.now()}.jpg`;
+    console.log(`Uploading to Supabase as: ${fileName}`);
 
     // Upload to Supabase Storage
     const { url, path } = await uploadImageToSupabase(compressedBuffer, fileName);
+    console.log(`Upload successful: ${url}`);
 
     // Get old photo URL to delete from Supabase
     const [oldGoat] = await sql`
@@ -50,12 +60,16 @@ router.post('/goat-photo/:id', upload.single('photo'), async (req, res) => {
     `;
 
     if (result.length === 0) {
+      console.error(`Goat ${goatId} not found in database`);
       return res.status(404).json({ error: 'Goat not found' });
     }
+
+    console.log(`Database updated for goat ${goatId}`);
 
     // Delete old photo from Supabase if it exists
     if (oldGoat && oldGoat.photo_url && oldGoat.photo_url.includes('supabase')) {
       const oldPath = oldGoat.photo_url.split('/').slice(-2).join('/');
+      console.log(`Deleting old photo: ${oldPath}`);
       await deleteImageFromSupabase(oldPath);
     }
 
@@ -68,8 +82,16 @@ router.post('/goat-photo/:id', upload.single('photo'), async (req, res) => {
       goat: result[0]
     });
   } catch (error) {
-    console.error('Error uploading goat photo:', error);
-    res.status(500).json({ error: error.message });
+    console.error('❌ Error uploading goat photo:', {
+      message: error.message,
+      stack: error.stack,
+      goatId: req.params.id,
+      hasFile: !!req.file
+    });
+    res.status(500).json({ 
+      error: error.message,
+      details: 'Check server logs for more information'
+    });
   }
 });
 

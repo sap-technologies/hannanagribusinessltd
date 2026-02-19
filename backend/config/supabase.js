@@ -23,6 +23,12 @@ export const supabase = createClient(supabaseUrl || '', supabaseKey || '');
  */
 export async function uploadImageToSupabase(fileBuffer, fileName, bucket = 'goat-images') {
   try {
+    if (!supabaseUrl || !supabaseKey) {
+      throw new Error('Supabase credentials not configured. Please set SUPABASE_URL and SUPABASE_SERVICE_KEY in environment variables.');
+    }
+
+    console.log(`Uploading to Supabase: bucket=${bucket}, file=${fileName}, size=${fileBuffer.length}`);
+
     const { data, error } = await supabase.storage
       .from(bucket)
       .upload(fileName, fileBuffer, {
@@ -31,20 +37,30 @@ export async function uploadImageToSupabase(fileBuffer, fileName, bucket = 'goat
       });
 
     if (error) {
+      console.error('Supabase upload error:', error);
       throw new Error(`Supabase upload error: ${error.message}`);
     }
+
+    console.log('Upload successful, getting public URL...');
 
     // Get public URL
     const { data: { publicUrl } } = supabase.storage
       .from(bucket)
       .getPublicUrl(data.path);
 
+    console.log(`Public URL: ${publicUrl}`);
+
     return {
       url: publicUrl,
       path: data.path
     };
   } catch (error) {
-    console.error('Error uploading to Supabase:', error);
+    console.error('Error uploading to Supabase:', {
+      message: error.message,
+      bucket,
+      fileName,
+      hasCredentials: !!(supabaseUrl && supabaseKey)
+    });
     throw error;
   }
 }
