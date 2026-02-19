@@ -381,10 +381,56 @@ function App({ user, onProfileUpdate, showProfile, onProfileNavigate }) {
     }
   }, [currentProject, breedingFarmTab, goatPresenter, breedingPresenterInstance, kidGrowthPresenterInstance, healthPresenterInstance, vaccinationPresenterInstance, feedingPresenterInstance, salesBreedingPresenterInstance, salesMeatPresenterInstance, expensesPresenterInstance, monthlySummaryPresenterInstance]);
 
-  // Reset form visibility when switching tabs
+  // Reset all UI states when switching tabs - ensures users see default list view
   useEffect(() => {
     setShowForm(false);
+    setEditingGoat(null);
+    setEditingBreeding(null);
+    setEditingKidGrowth(null);
+    setEditingHealth(null);
+    setEditingVaccination(null);
+    setEditingFeeding(null);
+    setEditingSalesBreeding(null);
+    setEditingSalesMeat(null);
+    setEditingExpenses(null);
+    setEditingMonthlySummary(null);
+    setSelectedGoat(null);
+    setSelectedBreeding(null);
+    setSelectedKidGrowth(null);
+    setSelectedHealth(null);
+    setSelectedVaccination(null);
+    setSelectedFeeding(null);
+    setSelectedSalesBreeding(null);
+    setSelectedSalesMeat(null);
+    setSelectedExpenses(null);
+    setSelectedMonthlySummary(null);
+    setIsMobileMenuOpen(false);
   }, [breedingFarmTab]);
+
+  // Reset all UI states when switching projects - ensures clean state
+  useEffect(() => {
+    setShowForm(false);
+    setEditingGoat(null);
+    setEditingBreeding(null);
+    setEditingKidGrowth(null);
+    setEditingHealth(null);
+    setEditingVaccination(null);
+    setEditingFeeding(null);
+    setEditingSalesBreeding(null);
+    setEditingSalesMeat(null);
+    setEditingExpenses(null);
+    setEditingMonthlySummary(null);
+    setSelectedGoat(null);
+    setSelectedBreeding(null);
+    setSelectedKidGrowth(null);
+    setSelectedHealth(null);
+    setSelectedVaccination(null);
+    setSelectedFeeding(null);
+    setSelectedSalesBreeding(null);
+    setSelectedSalesMeat(null);
+    setSelectedExpenses(null);
+    setSelectedMonthlySummary(null);
+  }, [currentProject]);
 
   // Handler functions for goats
   const handleFormSubmit = async (goatData) => {
