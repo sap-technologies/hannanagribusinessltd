@@ -118,7 +118,7 @@ const SalesBreedingForm = ({ onSubmit, editingRecord, onCancel, goats = [] }) =>
 
         <div className="form-row">
           <div className="form-group">
-            <label>Sex</label>
+            <label>Sex (Optional)</label>
             <select
               name="sex"
               value={formData.sex}
@@ -131,7 +131,7 @@ const SalesBreedingForm = ({ onSubmit, editingRecord, onCancel, goats = [] }) =>
           </div>
 
           <div className="form-group">
-            <label>Age (Months)</label>
+            <label>Age (Months) (Optional)</label>
             <input
               type="number"
               name="age_months"
@@ -143,7 +143,7 @@ const SalesBreedingForm = ({ onSubmit, editingRecord, onCancel, goats = [] }) =>
           </div>
 
           <div className="form-group">
-            <label>Buyer</label>
+            <label>Buyer (Optional)</label>
             <input
               type="text"
               name="buyer"
@@ -170,7 +170,7 @@ const SalesBreedingForm = ({ onSubmit, editingRecord, onCancel, goats = [] }) =>
           </div>
 
           <div className="form-group">
-            <label>Payment Method</label>
+            <label>Payment Method (Optional)</label>
             <select
               name="payment_method"
               value={formData.payment_method}

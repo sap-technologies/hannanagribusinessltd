@@ -100,7 +100,7 @@ const FeedingForm = ({ onSubmit, editingRecord, onCancel, goats = [] }) => {
           </div>
 
           <div className="form-group">
-            <label>Group Name</label>
+            <label>Group Name (Optional)</label>
             <input
               type="text"
               name="group_name"
@@ -131,7 +131,7 @@ const FeedingForm = ({ onSubmit, editingRecord, onCancel, goats = [] }) => {
           </div>
 
           <div className="form-group">
-            <label>Quantity Used (kg)</label>
+            <label>Quantity Used (kg) (Optional)</label>
             <input
               type="number"
               name="quantity_used"
@@ -143,7 +143,7 @@ const FeedingForm = ({ onSubmit, editingRecord, onCancel, goats = [] }) => {
           </div>
 
           <div className="form-group">
-            <label>Purpose</label>
+            <label>Purpose (Optional)</label>
             <select
               name="purpose"
               value={formData.purpose}
@@ -158,7 +158,7 @@ const FeedingForm = ({ onSubmit, editingRecord, onCancel, goats = [] }) => {
 
         <div className="form-row">
           <div className="form-group">
-            <label>Weight Gain Observed (kgs)</label>
+            <label>Weight Gain Observed (kgs) (Optional)</label>
             <input
               type="number"
               name="weight_gain_kgs"
@@ -170,7 +170,7 @@ const FeedingForm = ({ onSubmit, editingRecord, onCancel, goats = [] }) => {
           </div>
 
           <div className="form-group" style={{ gridColumn: '1 / -1' }}>
-            <label>Remarks</label>
+            <label>Remarks (Optional)</label>
             <textarea
               name="remarks"
               value={formData.remarks}

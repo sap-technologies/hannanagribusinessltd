@@ -225,7 +225,7 @@ const GoatForm = ({ onSubmit, editingGoat, onCancel, goats = [] }) => {
           </div>
 
           <div className="form-group">
-            <label>Source</label>
+            <label>Source (Optional)</label>
             <select
               name="source"
               value={formData.source}
@@ -240,7 +240,7 @@ const GoatForm = ({ onSubmit, editingGoat, onCancel, goats = [] }) => {
           </div>
 
           <div className="form-group">
-            <label>Mother ID</label>
+            <label>Mother ID (Optional)</label>
             <select
               name="mother_id"
               value={formData.mother_id}
@@ -256,7 +256,7 @@ const GoatForm = ({ onSubmit, editingGoat, onCancel, goats = [] }) => {
           </div>
 
           <div className="form-group">
-            <label>Father ID</label>
+            <label>Father ID (Optional)</label>
             <select
               name="father_id"
               value={formData.father_id}
@@ -272,7 +272,7 @@ const GoatForm = ({ onSubmit, editingGoat, onCancel, goats = [] }) => {
           </div>
 
           <div className="form-group">
-            <label>Status</label>
+            <label>Status (Optional)</label>
             <select
               name="status"
               value={formData.status}
@@ -287,7 +287,7 @@ const GoatForm = ({ onSubmit, editingGoat, onCancel, goats = [] }) => {
           </div>
 
           <div className="form-group">
-            <label>Weight (kg)</label>
+            <label>Weight (kg) (Optional)</label>
             <input
               type="number"
               step="0.01"
@@ -300,7 +300,7 @@ const GoatForm = ({ onSubmit, editingGoat, onCancel, goats = [] }) => {
         </div>
 
         <div className="form-group full-width">
-          <label>Remarks</label>
+          <label>Remarks (Optional)</label>
           <textarea
             name="remarks"
             value={formData.remarks}

@@ -120,7 +120,7 @@ const SalesMeatForm = ({ onSubmit, editingRecord, onCancel, goats = [] }) => {
 
             <div className="sales-meat-form-group">
               <label>
-                Buyer Name
+                Buyer Name (Optional)
               </label>
               <input
                 type="text"
@@ -215,7 +215,7 @@ const SalesMeatForm = ({ onSubmit, editingRecord, onCancel, goats = [] }) => {
           
           <div className="sales-meat-form-row">
             <div className="sales-meat-form-group">
-              <label>Payment Method</label>
+              <label>Payment Method (Optional)</label>
               <select
                 name="payment_method"
                 value={formData.payment_method}

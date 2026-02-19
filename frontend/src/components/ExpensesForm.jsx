@@ -107,7 +107,7 @@ const ExpensesForm = ({ onSubmit, editingRecord, onCancel }) => {
 
         <div className="form-row">
           <div className="form-group full-width">
-            <label>Description</label>
+            <label>Description (Optional)</label>
             <textarea
               name="description"
               value={formData.description}
@@ -120,7 +120,7 @@ const ExpensesForm = ({ onSubmit, editingRecord, onCancel }) => {
 
         <div className="form-row">
           <div className="form-group">
-            <label>Paid By</label>
+            <label>Paid By (Optional)</label>
             <input
               type="text"
               name="paid_by"
@@ -131,7 +131,7 @@ const ExpensesForm = ({ onSubmit, editingRecord, onCancel }) => {
           </div>
 
           <div className="form-group">
-            <label>Approved By</label>
+            <label>Approved By (Optional)</label>
             <input
               type="text"
               name="approved_by"

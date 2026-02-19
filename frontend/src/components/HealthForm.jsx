@@ -105,7 +105,7 @@ const HealthForm = ({ onSubmit, editingRecord, onCancel, goats = [] }) => {
       </div>
 
       <div style={styles.formGroup}>
-        <label>Problem Observed</label>
+        <label>Problem Observed (Optional)</label>
         <textarea
           name="problem_observed"
           value={formData.problem_observed}
@@ -117,7 +117,7 @@ const HealthForm = ({ onSubmit, editingRecord, onCancel, goats = [] }) => {
       </div>
 
       <div style={styles.formGroup}>
-        <label>Treatment Given</label>
+        <label>Treatment Given (Optional)</label>
         <textarea
           name="treatment_given"
           value={formData.treatment_given}

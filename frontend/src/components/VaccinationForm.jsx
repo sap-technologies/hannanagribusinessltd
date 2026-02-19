@@ -140,7 +140,7 @@ const VaccinationForm = ({ onSubmit, editingRecord, onCancel, goats = [] }) => {
           </div>
 
           <div className="form-group">
-            <label>Dosage</label>
+            <label>Dosage (Optional)</label>
             <input
               type="text"
               name="dosage"
@@ -151,7 +151,7 @@ const VaccinationForm = ({ onSubmit, editingRecord, onCancel, goats = [] }) => {
           </div>
 
           <div className="form-group">
-            <label>Next Due Date</label>
+            <label>Next Due Date (Optional)</label>
             <input
               type="date"
               name="next_due_date"

@@ -154,7 +154,7 @@ const BreedingForm = ({ onSubmit, editingRecord, onCancel, goats = [] }) => {
 
       <div style={styles.row}>
         <div style={styles.formGroup}>
-          <label>Expected Kidding Date</label>
+          <label>Expected Kidding Date (Optional)</label>
           <input
             type="date"
             name="expected_kidding_date"
@@ -166,7 +166,7 @@ const BreedingForm = ({ onSubmit, editingRecord, onCancel, goats = [] }) => {
         </div>
 
         <div style={styles.formGroup}>
-          <label>Actual Kidding Date</label>
+          <label>Actual Kidding Date (Optional)</label>
           <input
             type="date"
             name="actual_kidding_date"
@@ -179,7 +179,7 @@ const BreedingForm = ({ onSubmit, editingRecord, onCancel, goats = [] }) => {
 
       <div style={styles.row}>
         <div style={styles.formGroup}>
-          <label>Number of Kids</label>
+          <label>Number of Kids (Optional)</label>
           <input
             type="number"
             name="no_of_kids"
@@ -191,7 +191,7 @@ const BreedingForm = ({ onSubmit, editingRecord, onCancel, goats = [] }) => {
         </div>
 
         <div style={styles.formGroup}>
-          <label>Male Kids</label>
+          <label>Male Kids (Optional)</label>
           <input
             type="number"
             name="male_kids"
@@ -203,7 +203,7 @@ const BreedingForm = ({ onSubmit, editingRecord, onCancel, goats = [] }) => {
         </div>
 
         <div style={styles.formGroup}>
-          <label>Female Kids</label>
+          <label>Female Kids (Optional)</label>
           <input
             type="number"
             name="female_kids"
@@ -216,7 +216,7 @@ const BreedingForm = ({ onSubmit, editingRecord, onCancel, goats = [] }) => {
       </div>
 
       <div style={styles.formGroup}>
-        <label>Kidding Outcome</label>
+        <label>Kidding Outcome (Optional)</label>
         <select
           name="kidding_outcome"
           value={formData.kidding_outcome}
@@ -233,7 +233,7 @@ const BreedingForm = ({ onSubmit, editingRecord, onCancel, goats = [] }) => {
       </div>
 
       <div style={styles.formGroup}>
-        <label>Remarks</label>
+        <label>Remarks (Optional)</label>
         <textarea
           name="remarks"
           value={formData.remarks}

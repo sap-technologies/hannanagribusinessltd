@@ -119,7 +119,7 @@ const KidGrowthForm = ({ onSubmit, editingRecord, onCancel }) => {
         </div>
 
         <div style={styles.formGroup}>
-          <label>Weaning Weight (kg)</label>
+          <label>Weaning Weight (kg) (Optional)</label>
           <input
             type="number"
             step="0.01"
@@ -147,7 +147,7 @@ const KidGrowthForm = ({ onSubmit, editingRecord, onCancel }) => {
       </div>
 
       <div style={styles.formGroup}>
-        <label>Remarks</label>
+        <label>Remarks (Optional)</label>
         <textarea
           name="remarks"
           value={formData.remarks}
