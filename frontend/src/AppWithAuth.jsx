@@ -185,14 +185,6 @@ function AppWithAuth() {
             <span className="btn-text">Dashboard</span>
           </button>
           <button 
-            className="btn-search"
-            onClick={handleSearchClick}
-            title="Global Search"
-          >
-            <span className="btn-icon">🔍</span>
-            <span className="btn-text">Search</span>
-          </button>
-          <button 
             className="btn-reminders"
             onClick={handleRemindersClick}
             title="View Reminders"
@@ -249,6 +241,14 @@ function AppWithAuth() {
           <button className="btn-logout" onClick={handleLogout} title="Logout">
             <span className="btn-icon">🚪</span>
             <span className="btn-text">Logout</span>
+          </button>
+          <button 
+            className="btn-search"
+            onClick={handleSearchClick}
+            title="Global Search"
+          >
+            <span className="btn-icon">🔍</span>
+            <span className="btn-text">Search</span>
           </button>
         </div>
       </div>
